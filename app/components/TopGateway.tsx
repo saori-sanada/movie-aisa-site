@@ -78,6 +78,25 @@ export function TopGateway() {
       </Link>;
     })()}
 
+    <div className="mobile-home-complete">
+      <img
+        src="/top/home-mobile-9x16.png"
+        alt="まなだMOViEとaisaのスマートフォン用ポートフォリオビジュアル"
+        width="941"
+        height="1672"
+      />
+      <Link
+        href="/movie"
+        aria-label="動画制作を見る"
+        className="mobile-home-link mobile-home-link--movie"
+      />
+      <Link
+        href="/aisa"
+        aria-label="AI事業を見る"
+        className="mobile-home-link mobile-home-link--aisa"
+      />
+    </div>
+
     <div className="top-mobile-worlds">
       {(["movie", "aisa"] as const).map((brand) => {
         const content = topContent.brands[brand];

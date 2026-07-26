@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import type { MouseEvent } from "react";
 import { moviePage } from "../data/moviePage";
 
 type SectionId = "movie-top" | "services" | "works" | "profile";
@@ -62,10 +63,28 @@ export function MovieHeader() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+  const navigateToSection = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#") || !window.matchMedia("(max-width: 768px)").matches) {
+      closeMenu();
+      return;
+    }
+
+    event.preventDefault();
+    closeMenu();
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.replaceState(null, "", href);
+      });
+    });
+  };
 
   return (
     <header className="movie-design-header" ref={menuRef}>
-      <a className="movie-mobile-brand" href="#movie-top" onClick={closeMenu}>MOViE</a>
+      <a className="movie-mobile-brand" href="#movie-top" onClick={(event) => navigateToSection(event, "#movie-top")}>まなだMOViE</a>
       <button
         ref={toggleRef}
         className="movie-menu-toggle"
@@ -83,7 +102,7 @@ export function MovieHeader() {
           const content = <span>{item.label}</span>;
           return item.href.startsWith("/")
             ? <Link key={item.href} href={item.href} onClick={closeMenu} className={active ? "is-active" : ""} aria-current={active ? "location" : undefined}>{content}</Link>
-            : <a key={item.href} href={item.href} onClick={closeMenu} className={active ? "is-active" : ""} aria-current={active ? "location" : undefined}>{content}</a>;
+            : <a key={item.href} href={item.href} onClick={(event) => navigateToSection(event, item.href)} className={active ? "is-active" : ""} aria-current={active ? "location" : undefined}>{content}</a>;
         })}
       </nav>
       {menuOpen && <button className="movie-menu-backdrop" type="button" aria-label="メニューを閉じる" onClick={closeMenu} />}

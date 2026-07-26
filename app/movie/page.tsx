@@ -66,6 +66,7 @@ export default function MoviePage() {
         </MovieRevealSection>
 
         <MovieRevealSection id="profile" className="movie-design-about">
+          <div className="movie-profile-mobile-label">PROFILE</div>
           <div className="movie-design-about-photo">
             <Image src={movieBrand.profile.image} alt={movieBrand.profile.imageAlt} fill sizes="48vw" style={{ objectPosition: movieBrand.profile.objectPosition }} />
           </div>
