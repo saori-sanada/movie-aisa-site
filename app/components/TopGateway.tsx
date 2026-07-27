@@ -52,20 +52,8 @@ export function TopGateway() {
       <span>Creative Producer</span>
     </div>
 
-    <Link
-      className="top-hit top-hit-movie"
-      href={topContent.brands.movie.href}
-      aria-label="まなだMOViEのページを見る"
-      onMouseEnter={() => activate("movie")}
-      onFocus={() => activate("movie")}
-    />
-    <Link
-      className="top-hit top-hit-aisa"
-      href={topContent.brands.aisa.href}
-      aria-label="aisaのページを見る"
-      onMouseEnter={() => activate("aisa")}
-      onFocus={() => activate("aisa")}
-    />
+    <div className="top-hit top-hit-movie" aria-hidden="true" onMouseEnter={() => activate("movie")} />
+    <div className="top-hit top-hit-aisa" aria-hidden="true" onMouseEnter={() => activate("aisa")} />
 
     <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
 
@@ -80,15 +68,22 @@ export function TopGateway() {
       </div>
     </div>
 
-    {active && (() => {
-      const content = topContent.brands[active];
-      return <Link className={`top-card top-card-${active}`} href={content.href} aria-label={active === "movie" ? "まなだMOViEのページを見る" : "AI自動化 aisaのページを見る"}>
+    {(["movie", "aisa"] as const).map((brand) => {
+      const content = topContent.brands[brand];
+      return <Link
+        key={brand}
+        className={`top-card top-card-${brand}`}
+        href={content.href}
+        aria-label={brand === "movie" ? "まなだMOViEのページを見る" : "AI自動化 aisaのページを見る"}
+        onFocus={() => activate(brand)}
+        onBlur={() => setActive(null)}
+      >
         <p className="top-card-label">{content.label}</p>
         <h2>{content.title}</h2>
         <p className="top-card-description">{content.description.map(line => <span key={line}>{line}</span>)}</p>
         <span className="top-card-action">{content.action}<span aria-hidden="true">→</span></span>
       </Link>;
-    })()}
+    })}
 
     <div className="mobile-home-complete">
       <img

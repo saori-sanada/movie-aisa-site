@@ -378,8 +378,24 @@ html,body{width:100%;max-width:100%;overflow-x:clip}
 img,video,iframe{max-width:100%}
 img{height:auto}
 :focus-visible{outline:2px solid currentColor;outline-offset:4px}
-.top-hit{z-index:6;pointer-events:auto;cursor:pointer}
-.top-card{z-index:7}
+.top-hit{z-index:2;pointer-events:auto;cursor:default}
+.top-card{
+  z-index:7;
+  opacity:0;
+  visibility:visible;
+  clip-path:inset(50%);
+  pointer-events:none;
+  animation:none;
+  transition:opacity .42s ease,visibility .42s,clip-path 0s .42s;
+}
+.top-gateway.is-movie .top-card-movie,
+.top-gateway.is-aisa .top-card-aisa{
+  opacity:1;
+  visibility:visible;
+  clip-path:none;
+  pointer-events:auto;
+  transition:opacity .42s ease,visibility 0s,clip-path 0s;
+}
 .top-mobile-worlds,.mobile-home-complete{display:none}
 .mobile-home-complete>img{display:block;width:100%;height:auto}
 
@@ -628,6 +644,18 @@ img{height:auto}
 }
 
 /* Smartphone final density and navigation refinements */
+@keyframes mobileHomeDissolve{
+  from{opacity:0;transform:scale(.995)}
+  to{opacity:1;transform:scale(1)}
+}
+@keyframes mobileBrandIn{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes mobileOwnerIn{
+  from{opacity:0}
+  to{opacity:.86}
+}
 .movie-profile-mobile-label{display:none}
 @media(max-width:768px){
   .top-gateway>.top-copy{display:none!important}
@@ -640,6 +668,7 @@ img{height:auto}
     margin:0 auto;
     overflow:hidden;
     background:#050416;
+    animation:mobileHomeDissolve .9s cubic-bezier(.22,1,.36,1) both;
   }
   .mobile-home-complete>img{
     display:block;
@@ -658,18 +687,22 @@ img{height:auto}
     white-space:nowrap;
   }
   .mobile-home-owner{
-    top:40.8%;
-    left:50%;
-    width:80%;
-    transform:translateX(-50%);
+    top:41.2%;
+    left:0;
+    width:100%;
+    height:4.2%;
+    box-sizing:border-box;
     display:flex;
     flex-direction:column;
+    justify-content:center;
     align-items:center;
-    gap:2px;
+    gap:1px;
+    background:#080d29;
     color:#fffaf0;
     text-align:center;
     opacity:.86;
     text-shadow:0 1px 3px #060817a8;
+    animation:mobileOwnerIn 1s .35s cubic-bezier(.22,1,.36,1) both;
   }
   .mobile-home-owner strong{
     font:500 clamp(9px,2.5vw,11px)/1.2 Arial,sans-serif;
@@ -689,13 +722,14 @@ img{height:auto}
     color:#fff;
   }
   .mobile-home-brand--movie{
-    top:8.9%;
+    top:7.7%;
     left:10.5%;
     width:40%;
     max-width:40%;
     font-size:clamp(18px,5.1vw,22px);
     text-align:left;
     text-shadow:0 2px 7px #3a1010a8;
+    animation:mobileBrandIn 1s .22s cubic-bezier(.22,1,.36,1) both;
   }
   .mobile-home-brand--aisa{
     top:70.2%;
@@ -708,19 +742,30 @@ img{height:auto}
     font-size:clamp(22px,5.8vw,26px);
     text-align:center;
     text-shadow:0 2px 7px #301670a8;
+    animation:mobileBrandIn 1s .22s cubic-bezier(.22,1,.36,1) both;
   }
   .mobile-home-link{
     position:absolute;
     z-index:10;
-    height:3.4%;
     min-height:44px;
-    transform:translateY(-50%);
     border-radius:4px;
     background:transparent;
     pointer-events:auto;
+    touch-action:manipulation;
+    transition:transform .14s ease,background-color .14s ease,box-shadow .14s ease;
   }
-  .mobile-home-link--movie{top:26.14%;left:13.1%;width:27.6%}
-  .mobile-home-link--aisa{top:89.16%;left:54.9%;width:26.1%}
+  .mobile-home-link--movie{top:11.8%;left:10.2%;width:36.5%;height:17.7%}
+  .mobile-home-link--aisa{top:74.7%;left:51.5%;width:33.6%;height:17.7%}
+  .mobile-home-link--movie:active{
+    transform:scale(.99);
+    background:#ff9ab51f;
+    box-shadow:inset 0 0 16px #ff89aa48;
+  }
+  .mobile-home-link--aisa:active{
+    transform:scale(.99);
+    background:#b79aff1f;
+    box-shadow:inset 0 0 16px #a782ff48;
+  }
   .mobile-home-link:focus-visible{
     outline:3px solid #fff;
     outline-offset:2px;
@@ -874,4 +919,13 @@ img{height:auto}
   .movie-mobile-brand{font-size:16px}
   .movie-design-service-card h3{font-size:17px}
   .movie-design-about-copy p{font-size:16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .mobile-home-complete,
+  .mobile-home-owner,
+  .mobile-home-brand{
+    opacity:1!important;
+    animation:none!important;
+  }
 }
