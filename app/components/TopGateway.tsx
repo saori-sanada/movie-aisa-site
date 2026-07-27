@@ -52,8 +52,20 @@ export function TopGateway() {
       <span>Creative Producer</span>
     </div>
 
-    <div className="top-hit top-hit-movie" aria-hidden="true" onMouseEnter={() => activate("movie")} />
-    <div className="top-hit top-hit-aisa" aria-hidden="true" onMouseEnter={() => activate("aisa")} />
+    <Link
+      className="top-hit top-hit-movie"
+      href={topContent.brands.movie.href}
+      aria-label="まなだMOViEのページを見る"
+      onMouseEnter={() => activate("movie")}
+      onFocus={() => activate("movie")}
+    />
+    <Link
+      className="top-hit top-hit-aisa"
+      href={topContent.brands.aisa.href}
+      aria-label="aisaのページを見る"
+      onMouseEnter={() => activate("aisa")}
+      onFocus={() => activate("aisa")}
+    />
 
     <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
 
@@ -85,6 +97,12 @@ export function TopGateway() {
         width="941"
         height="1672"
       />
+      <div className="mobile-home-owner">
+        <strong>SAORI SANADA</strong>
+        <span>Creative Producer</span>
+      </div>
+      <strong className="mobile-home-brand mobile-home-brand--movie">まなだMOViE</strong>
+      <strong className="mobile-home-brand mobile-home-brand--aisa">aisa</strong>
       <Link
         href="/movie"
         aria-label="動画制作を見る"

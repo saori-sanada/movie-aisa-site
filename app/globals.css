@@ -378,7 +378,8 @@ html,body{width:100%;max-width:100%;overflow-x:clip}
 img,video,iframe{max-width:100%}
 img{height:auto}
 :focus-visible{outline:2px solid currentColor;outline-offset:4px}
-.top-hit{cursor:default}
+.top-hit{z-index:6;pointer-events:auto;cursor:pointer}
+.top-card{z-index:7}
 .top-mobile-worlds,.mobile-home-complete{display:none}
 .mobile-home-complete>img{display:block;width:100%;height:auto}
 
@@ -647,15 +648,76 @@ img{height:auto}
     height:auto;
     aspect-ratio:9/16;
     object-fit:contain;
+    pointer-events:none;
+  }
+  .mobile-home-owner,
+  .mobile-home-brand{
+    position:absolute;
+    z-index:1;
+    pointer-events:none;
+    white-space:nowrap;
+  }
+  .mobile-home-owner{
+    top:40.8%;
+    left:50%;
+    width:80%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    color:#fffaf0;
+    text-align:center;
+    opacity:.86;
+    text-shadow:0 1px 3px #060817a8;
+  }
+  .mobile-home-owner strong{
+    font:500 clamp(9px,2.5vw,11px)/1.2 Arial,sans-serif;
+    letter-spacing:.19em;
+  }
+  .mobile-home-owner span{
+    font:400 clamp(8px,2.2vw,10px)/1.2 Arial,sans-serif;
+    letter-spacing:.09em;
+  }
+  .mobile-home-brand{
+    overflow:visible;
+    text-align:left;
+    font-family:"Yu Mincho","Hiragino Mincho ProN",Georgia,serif;
+    font-weight:600;
+    line-height:1;
+    letter-spacing:0;
+    color:#fff;
+  }
+  .mobile-home-brand--movie{
+    top:8.9%;
+    left:10.5%;
+    width:40%;
+    max-width:40%;
+    font-size:clamp(18px,5.1vw,22px);
+    text-align:left;
+    text-shadow:0 2px 7px #3a1010a8;
+  }
+  .mobile-home-brand--aisa{
+    top:70.2%;
+    right:auto;
+    bottom:auto;
+    left:60.5%;
+    width:34%;
+    max-width:34%;
+    transform:translateX(-50%);
+    font-size:clamp(22px,5.8vw,26px);
+    text-align:center;
+    text-shadow:0 2px 7px #301670a8;
   }
   .mobile-home-link{
     position:absolute;
-    z-index:2;
+    z-index:10;
     height:3.4%;
     min-height:44px;
     transform:translateY(-50%);
     border-radius:4px;
     background:transparent;
+    pointer-events:auto;
   }
   .mobile-home-link--movie{top:26.14%;left:13.1%;width:27.6%}
   .mobile-home-link--aisa{top:89.16%;left:54.9%;width:26.1%}
