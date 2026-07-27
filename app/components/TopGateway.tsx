@@ -17,7 +17,7 @@ export function TopGateway() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const returning = sessionStorage.getItem("top-intro-seen") === "true";
     const mode: Exclude<IntroMode, "pending"> = returning ? "short" : "full";
-    const duration = reducedMotion ? 160 : mode === "full" ? 2400 : 420;
+    const duration = reducedMotion ? 80 : mode === "full" ? 700 : 240;
 
     setIntroMode(mode);
     sessionStorage.setItem("top-intro-seen", "true");
@@ -52,8 +52,22 @@ export function TopGateway() {
       <span>Creative Producer</span>
     </div>
 
-    <div className="top-hit top-hit-movie" aria-hidden="true" onMouseEnter={() => activate("movie")} />
-    <div className="top-hit top-hit-aisa" aria-hidden="true" onMouseEnter={() => activate("aisa")} />
+    <Link
+      className="top-hit top-hit-movie"
+      href="/movie"
+      prefetch
+      aria-label="動画制作を見る"
+      onMouseEnter={() => activate("movie")}
+      onFocus={() => activate("movie")}
+    />
+    <Link
+      className="top-hit top-hit-aisa"
+      href="/aisa"
+      prefetch
+      aria-label="AI事業を見る"
+      onMouseEnter={() => activate("aisa")}
+      onFocus={() => activate("aisa")}
+    />
 
     <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
 
@@ -68,15 +82,21 @@ export function TopGateway() {
       </div>
     </div>
 
-    {active && (() => {
-      const content = topContent.brands[active];
-      return <Link className={`top-card top-card-${active}`} href={content.href} aria-label={active === "movie" ? "まなだMOViEのページを見る" : "AI自動化 aisaのページを見る"}>
+    {(["movie", "aisa"] as const).map((brand) => {
+      const content = topContent.brands[brand];
+      return <Link
+        key={brand}
+        className={`top-card top-card-${brand}`}
+        href={content.href}
+        prefetch
+        aria-label={brand === "movie" ? "まなだMOViEのページを見る" : "AI自動化 aisaのページを見る"}
+      >
         <p className="top-card-label">{content.label}</p>
         <h2>{content.title}</h2>
         <p className="top-card-description">{content.description.map(line => <span key={line}>{line}</span>)}</p>
         <span className="top-card-action">{content.action}<span aria-hidden="true">→</span></span>
       </Link>;
-    })()}
+    })}
 
     <div className="mobile-home-complete">
       <img
@@ -85,15 +105,37 @@ export function TopGateway() {
         width="941"
         height="1672"
       />
+      <div className="mobile-home-owner">
+        <strong>SAORI SANADA</strong>
+        <span>Creative Producer</span>
+      </div>
+      <strong className="mobile-home-brand mobile-home-brand--movie">まなだMOViE</strong>
+      <strong className="mobile-home-brand mobile-home-brand--aisa">aisa</strong>
       <Link
         href="/movie"
+        prefetch
         aria-label="動画制作を見る"
         className="mobile-home-link mobile-home-link--movie"
+        onClick={(event) => {
+          const href = event.currentTarget.href;
+          const currentUrl = window.location.href;
+          window.setTimeout(() => {
+            if (window.location.href === currentUrl) window.location.assign(href);
+          }, 120);
+        }}
       />
       <Link
         href="/aisa"
+        prefetch
         aria-label="AI事業を見る"
         className="mobile-home-link mobile-home-link--aisa"
+        onClick={(event) => {
+          const href = event.currentTarget.href;
+          const currentUrl = window.location.href;
+          window.setTimeout(() => {
+            if (window.location.href === currentUrl) window.location.assign(href);
+          }, 120);
+        }}
       />
     </div>
 
@@ -109,7 +151,7 @@ export function TopGateway() {
                   <span>{content.label}</span>
                 </div>
               </div>
-              <Link className={`top-mobile-card top-card-${brand}`} href={content.href}>
+              <Link className={`top-mobile-card top-card-${brand}`} href={content.href} prefetch>
                 <h2>{content.title}</h2>
                 <p>{content.description.map((line) => <span key={line}>{line}</span>)}</p>
                 <span className="top-card-action">{content.action}<span aria-hidden="true">→</span></span>
