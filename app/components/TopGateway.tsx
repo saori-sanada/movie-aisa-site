@@ -10,37 +10,42 @@ type IntroMode = "pending" | "full" | "short";
 export function TopGateway() {
   const [active, setActive] = useState<ActiveBrand>(null);
   const [introMode, setIntroMode] = useState<IntroMode>("pending");
-  const [interactive, setInteractive] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const returning = sessionStorage.getItem("top-intro-seen") === "true";
     const mode: Exclude<IntroMode, "pending"> = returning ? "short" : "full";
-    const duration = reducedMotion ? 160 : mode === "full" ? 2400 : 420;
 
     setIntroMode(mode);
     sessionStorage.setItem("top-intro-seen", "true");
-    const readyTimer = window.setTimeout(() => setInteractive(true), duration);
 
     const close = (event: PointerEvent) => {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) setActive(null);
     };
     document.addEventListener("pointerdown", close);
     return () => {
-      window.clearTimeout(readyTimer);
       document.removeEventListener("pointerdown", close);
     };
   }, []);
 
   const activate = (brand: Exclude<ActiveBrand, null>) => {
-    if (interactive) setActive(brand);
+    setActive(brand);
   };
 
-  return <main ref={rootRef} className={`top-gateway is-intro-${introMode}${interactive ? " is-ready" : ""}${active ? ` is-${active}` : ""}`} onMouseLeave={() => setActive(null)} aria-label="真田紗織 ポートフォリオ">
+  return <main ref={rootRef} className={`top-gateway is-intro-${introMode} is-ready${active ? ` is-${active}` : ""}`} onMouseLeave={() => setActive(null)} aria-label="真田紗織 ポートフォリオ">
     <div className="top-art" aria-hidden="true">
-      <div className="top-world top-world-movie"><div className="top-world-image" /></div>
-      <div className="top-world top-world-aisa"><div className="top-world-image" /></div>
+      <picture className="top-picture">
+        <source media="(max-width: 768px)" srcSet="top/home-mobile-9x16.webp" />
+        <img
+          className="top-picture-image"
+          src="top/top-normal.webp"
+          alt=""
+          width="1672"
+          height="941"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </picture>
       <div className="top-art-shade top-art-shade-movie" />
       <div className="top-art-shade top-art-shade-aisa" />
     </div>
@@ -52,8 +57,8 @@ export function TopGateway() {
       <span>Creative Producer</span>
     </div>
 
-    <div className="top-hit top-hit-movie" aria-hidden="true" onMouseEnter={() => activate("movie")} />
-    <div className="top-hit top-hit-aisa" aria-hidden="true" onMouseEnter={() => activate("aisa")} />
+    <Link className="top-hit top-hit-movie" href="/movie/" aria-label="まなだMOViEへ移動" onMouseEnter={() => activate("movie")} />
+    <Link className="top-hit top-hit-aisa" href="/aisa/" aria-label="aisaへ移動" onMouseEnter={() => activate("aisa")} />
 
     <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
 
@@ -73,7 +78,7 @@ export function TopGateway() {
       return <Link
         key={brand}
         className={`top-card top-card-${brand}`}
-        href={content.href}
+        href={brand === "movie" ? "/movie/" : "/aisa/"}
         aria-label={brand === "movie" ? "まなだMOViEのページを見る" : "AI自動化 aisaのページを見る"}
         onFocus={() => activate(brand)}
         onBlur={() => setActive(null)}
@@ -86,12 +91,6 @@ export function TopGateway() {
     })}
 
     <div className="mobile-home-complete">
-      <img
-        src="/top/home-mobile-9x16.png"
-        alt="まなだMOViEとaisaのスマートフォン用ポートフォリオビジュアル"
-        width="941"
-        height="1672"
-      />
       <div className="mobile-home-owner">
         <strong>SAORI SANADA</strong>
         <span>Creative Producer</span>
@@ -99,12 +98,12 @@ export function TopGateway() {
       <strong className="mobile-home-brand mobile-home-brand--movie">まなだMOViE</strong>
       <strong className="mobile-home-brand mobile-home-brand--aisa">aisa</strong>
       <Link
-        href="/movie"
+        href="/movie/"
         aria-label="動画制作を見る"
         className="mobile-home-link mobile-home-link--movie"
       />
       <Link
-        href="/aisa"
+        href="/aisa/"
         aria-label="AI事業を見る"
         className="mobile-home-link mobile-home-link--aisa"
       />

@@ -184,14 +184,14 @@ img { max-width:100%; height:auto; }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.gateway-panel,.primary-button,.reveal,.scroll-reveal{transition:none;animation:none;opacity:1;transform:none}}
 
 /* Cinematic top gateway */
-.top-gateway{position:relative;width:100%;height:100svh;min-height:620px;overflow:hidden;background:#050416;color:#fff;isolation:isolate}.top-art{position:absolute;inset:0;z-index:0}.top-world{position:absolute;top:0;bottom:0;width:50%;overflow:hidden}.top-world-movie{left:0}.top-world-aisa{right:0}.top-world-image{position:absolute;top:0;bottom:0;width:200%;background:url("/top/top-normal.png") center/cover no-repeat}.top-world-movie .top-world-image{left:0}.top-world-aisa .top-world-image{right:0}.top-art-shade{position:absolute;top:0;bottom:0;width:50%;opacity:0;transition:opacity .5s ease;pointer-events:none}.top-art-shade-movie{left:0;background:#020108b8}.top-art-shade-aisa{right:0;background:#020108b8}.top-gateway.is-movie .top-art-shade-aisa,.top-gateway.is-aisa .top-art-shade-movie{opacity:1}.top-intro-dim{position:absolute;z-index:1;inset:0;background:#03030dbd;pointer-events:none}.top-identity{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.top-hit{position:absolute;z-index:2;top:0;bottom:0;width:50%;border:0;background:transparent;cursor:pointer}.top-hit:disabled{cursor:default}.top-hit-movie{left:0}.top-hit-aisa{right:0}.top-hit:focus-visible{outline:2px solid #fff;outline-offset:-8px}.top-copy{position:absolute;z-index:3;left:50%;top:53.5%;width:620px;max-width:620px;transform:translate(-50%,-50%);text-align:center;color:#fff;text-shadow:0 4px 24px #000,0 1px 4px #000;pointer-events:none}.top-copy h1{margin:0;font-family:"Times New Roman",Georgia,serif;font-size:122px;font-weight:400;line-height:.92;letter-spacing:-.045em}.top-copy h1 span{display:block}.top-copy p{margin:30px 0 0;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:29px;letter-spacing:.16em}.top-brands{position:absolute;z-index:3;top:34%;left:50%;width:800px;transform:translateX(-50%);display:grid;grid-template-columns:180px 180px;column-gap:440px;pointer-events:none}.top-brand{width:180px;display:flex;flex-direction:column;gap:9px;text-shadow:0 2px 16px #05030c,0 1px 4px #05030c;opacity:0;transform:translateY(12px);transition:opacity .4s ease}.top-brand-movie{justify-self:end;align-items:flex-end;text-align:right;color:#ffe4ed}.top-brand-aisa{justify-self:start;align-items:flex-start;text-align:left;color:#e6d8ff}.top-brand strong{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:23px;font-weight:400;letter-spacing:.035em;white-space:nowrap}.top-brand span{font:10px/1.4 Arial,sans-serif;letter-spacing:.24em;opacity:.68;white-space:nowrap}.top-gateway.is-movie .top-brand-movie,.top-gateway.is-aisa .top-brand-aisa{opacity:0!important}.top-gateway.is-movie .top-brand-aisa,.top-gateway.is-aisa .top-brand-movie{opacity:.28!important}.top-card{position:absolute;z-index:4;top:50%;width:350px;height:332px;padding:34px 42px 32px;display:flex;flex-direction:column;border:1px solid currentColor;border-radius:7px;color:#fff;animation:topCardIn .42s ease both;backdrop-filter:blur(8px)}.top-card-movie{left:5.1%;color:#ff80ad;background:linear-gradient(135deg,#35131ee8,#4e2025cf);box-shadow:0 0 5px currentColor,0 0 22px #ff5b8e88,inset 0 0 28px #ff779324}.top-card-aisa{right:5.1%;color:#c39cff;background:linear-gradient(135deg,#24166be8,#10104de0);box-shadow:0 0 5px currentColor,0 0 24px #8967ff99,inset 0 0 30px #744dff2c}.top-card-label{margin:0 0 26px;font-family:Arial,sans-serif;font-size:13px;letter-spacing:.18em}.top-card h2{margin:0 0 20px;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:30px;font-weight:500;letter-spacing:.06em}.top-card-description{margin:0;color:#fff;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:19px;line-height:1.8}.top-card-description span{display:block}.top-card a{width:100%;height:60px;min-height:60px;margin-top:auto;display:flex;align-items:center;justify-content:center;gap:28px;border:1px solid currentColor;border-radius:4px;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:15px;letter-spacing:.06em;transition:background .3s,box-shadow .3s}.top-card a:hover,.top-card a:focus-visible{background:#ffffff12;box-shadow:inset 0 0 18px currentColor}.top-instruction{position:absolute;z-index:4;left:50%;bottom:20px;transform:translateX(-50%);margin:0;font:10px/1 Arial,sans-serif;letter-spacing:.28em;opacity:.6}
+.top-gateway{position:relative;width:100%;height:100svh;min-height:620px;overflow:hidden;background:#050416;color:#fff;isolation:isolate}.top-art{position:absolute;inset:0;z-index:0}.top-picture,.top-picture-image{display:block;width:100%;height:100%}.top-picture-image{object-fit:cover;object-position:center}.top-art-shade{position:absolute;top:0;bottom:0;width:50%;opacity:0;transition:opacity .5s ease;pointer-events:none}.top-art-shade-movie{left:0;background:#020108b8}.top-art-shade-aisa{right:0;background:#020108b8}.top-gateway.is-movie .top-art-shade-aisa,.top-gateway.is-aisa .top-art-shade-movie{opacity:1}.top-intro-dim{position:absolute;z-index:1;inset:0;background:#03030d52;pointer-events:none}.top-identity{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.top-hit{position:absolute;z-index:2;top:0;bottom:0;width:50%;border:0;background:transparent;cursor:pointer}.top-hit:disabled{cursor:default}.top-hit-movie{left:0}.top-hit-aisa{right:0}.top-hit:focus-visible{outline:2px solid #fff;outline-offset:-8px}.top-copy{position:absolute;z-index:3;left:50%;top:53.5%;width:620px;max-width:620px;transform:translate(-50%,-50%);text-align:center;color:#fff;text-shadow:0 4px 24px #000,0 1px 4px #000;pointer-events:none}.top-copy h1{margin:0;font-family:"Times New Roman",Georgia,serif;font-size:122px;font-weight:400;line-height:.92;letter-spacing:-.045em}.top-copy h1 span{display:block}.top-copy p{margin:30px 0 0;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:29px;letter-spacing:.16em}.top-brands{position:absolute;z-index:3;top:34%;left:50%;width:800px;transform:translateX(-50%);display:grid;grid-template-columns:180px 180px;column-gap:440px;pointer-events:none}.top-brand{width:180px;display:flex;flex-direction:column;gap:9px;text-shadow:0 2px 16px #05030c,0 1px 4px #05030c;opacity:0;transform:translateY(12px);transition:opacity .4s ease}.top-brand-movie{justify-self:end;align-items:flex-end;text-align:right;color:#ffe4ed}.top-brand-aisa{justify-self:start;align-items:flex-start;text-align:left;color:#e6d8ff}.top-brand strong{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:23px;font-weight:400;letter-spacing:.035em;white-space:nowrap}.top-brand span{font:10px/1.4 Arial,sans-serif;letter-spacing:.24em;opacity:.68;white-space:nowrap}.top-gateway.is-movie .top-brand-movie,.top-gateway.is-aisa .top-brand-aisa{opacity:0!important}.top-gateway.is-movie .top-brand-aisa,.top-gateway.is-aisa .top-brand-movie{opacity:.28!important}.top-card{position:absolute;z-index:4;top:50%;width:350px;height:332px;padding:34px 42px 32px;display:flex;flex-direction:column;border:1px solid currentColor;border-radius:7px;color:#fff;animation:topCardIn .42s ease both;backdrop-filter:blur(8px)}.top-card-movie{left:5.1%;color:#ff80ad;background:linear-gradient(135deg,#35131ee8,#4e2025cf);box-shadow:0 0 5px currentColor,0 0 22px #ff5b8e88,inset 0 0 28px #ff779324}.top-card-aisa{right:5.1%;color:#c39cff;background:linear-gradient(135deg,#24166be8,#10104de0);box-shadow:0 0 5px currentColor,0 0 24px #8967ff99,inset 0 0 30px #744dff2c}.top-card-label{margin:0 0 26px;font-family:Arial,sans-serif;font-size:13px;letter-spacing:.18em}.top-card h2{margin:0 0 20px;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:30px;font-weight:500;letter-spacing:.06em}.top-card-description{margin:0;color:#fff;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:19px;line-height:1.8}.top-card-description span{display:block}.top-card a{width:100%;height:60px;min-height:60px;margin-top:auto;display:flex;align-items:center;justify-content:center;gap:28px;border:1px solid currentColor;border-radius:4px;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:15px;letter-spacing:.06em;transition:background .3s,box-shadow .3s}.top-card a:hover,.top-card a:focus-visible{background:#ffffff12;box-shadow:inset 0 0 18px currentColor}.top-instruction{position:absolute;z-index:4;left:50%;bottom:20px;transform:translateX(-50%);margin:0;font:10px/1 Arial,sans-serif;letter-spacing:.28em;opacity:.6}
 @keyframes topFade{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:none}}@keyframes copyFade{from{opacity:0;transform:translate(-50%,calc(-50% + 12px))}to{opacity:1;transform:translate(-50%,-50%)}}
 @keyframes topCardIn{from{opacity:0;transform:translateY(calc(-50% + 14px))}to{opacity:1;transform:translateY(-50%)}}
 @keyframes topWorldMovieIn{from{opacity:.12;transform:translateX(-32px)}to{opacity:1;transform:none}}@keyframes topWorldAisaIn{from{opacity:.12;transform:translateX(32px)}to{opacity:1;transform:none}}@keyframes topDimOut{from{opacity:1}to{opacity:0}}@keyframes topBrandIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.is-intro-full .top-world-movie .top-world-image{animation:topWorldMovieIn 1.15s .08s cubic-bezier(.22,1,.36,1) both}.is-intro-full .top-world-aisa .top-world-image{animation:topWorldAisaIn 1.15s .16s cubic-bezier(.22,1,.36,1) both}.is-intro-full .top-intro-dim{animation:topDimOut 1.05s .1s cubic-bezier(.22,1,.36,1) both}.is-intro-full .top-brand{animation:topBrandIn .72s 1.28s cubic-bezier(.22,1,.36,1) both}.is-intro-short .top-world-image{animation:topDimOut .35s ease-out reverse both}.is-intro-short .top-intro-dim{animation:topDimOut .36s ease-out both}.is-intro-short .top-brand{animation:topBrandIn .35s .05s ease-out both}.is-ready .top-brand{opacity:1;transform:none}
+.is-intro-full .top-intro-dim{animation:topDimOut .5s 0s cubic-bezier(.22,1,.36,1) both}.is-intro-full .top-brand{animation:topBrandIn .42s .08s cubic-bezier(.22,1,.36,1) both}.is-intro-short .top-intro-dim{animation:topDimOut .3s ease-out both}.is-intro-short .top-brand{animation:topBrandIn .3s 0s ease-out both}.is-ready .top-brand{opacity:1;transform:none}
 @media (max-width:900px){.top-gateway{min-height:540px}.top-art-image{object-position:center}.top-copy{top:44%;width:76vw}.top-copy h1{font-size:clamp(54px,11vw,92px)}.top-copy p{margin-top:20px;font-size:clamp(15px,2.6vw,22px)}.top-card{top:auto;bottom:6%;left:50%;right:auto;width:min(82vw,380px);padding:25px 28px 24px;transform:translate(-50%,14px)}.is-movie .top-card-movie,.is-aisa .top-card-aisa{transform:translateX(-50%)}.top-card-label{margin-bottom:15px}.top-card h2{margin-bottom:12px}.top-card-description{margin-bottom:18px}.top-card a{min-height:50px}.top-instruction{bottom:12px}.is-movie .top-instruction,.is-aisa .top-instruction{opacity:0}}
 @media (max-width:560px){.top-gateway{min-height:600px}.top-art-image{object-position:center}.top-copy{top:32%;width:88vw}.top-copy h1{font-size:clamp(48px,16vw,76px)}.top-copy p{font-size:15px;letter-spacing:.11em}.top-card{bottom:7%;width:calc(100% - 36px);padding:22px 24px}.top-card h2{font-size:23px}.top-card-description{font-size:14px}.top-hit{bottom:34%}}
-@media (prefers-reduced-motion:reduce){.top-world-image,.top-intro-dim,.top-brand{animation-duration:.15s!important;animation-delay:0s!important;transform:none!important}.top-art-shade,.top-card,.top-card a,.top-brand{transition:none}}
+@media (prefers-reduced-motion:reduce){.top-intro-dim,.top-brand{animation-duration:.15s!important;animation-delay:0s!important;transform:none!important}.top-art-shade,.top-card,.top-card a,.top-brand{transition:none}}
 
 /* Top card alignment fixes */
 .top-card{word-break:normal;overflow-wrap:normal}.top-card-label,.top-card h2{white-space:nowrap}.top-card-description{word-break:normal;overflow-wrap:normal;white-space:normal}.top-card-description span{white-space:nowrap}.top-card a{white-space:nowrap}
@@ -210,9 +210,8 @@ img { max-width:100%; height:auto; }
 .top-gateway.is-movie .top-brand-movie,.top-gateway.is-movie .top-brand-aisa,
 .top-gateway.is-aisa .top-brand-movie,.top-gateway.is-aisa .top-brand-aisa{opacity:1!important;transform:none}
 @keyframes topOwnerIn{from{opacity:0;transform:translate(-50%,18px)}to{opacity:1;transform:translate(-50%,0)}}
-.is-intro-full .top-world-movie .top-world-image,.is-intro-full .top-world-aisa .top-world-image{animation-duration:1.2s}
-.is-intro-full .top-owner{animation:topOwnerIn .78s 1.42s cubic-bezier(.22,1,.36,1) both}
-.is-intro-short .top-owner{animation:topOwnerIn .35s .05s ease-out both}
+.is-intro-full .top-owner{animation:topOwnerIn .45s .1s cubic-bezier(.22,1,.36,1) both}
+.is-intro-short .top-owner{animation:topOwnerIn .3s 0s ease-out both}
 .is-ready .top-owner{opacity:1;transform:translate(-50%,0)}
 @media(prefers-reduced-motion:reduce){.top-owner{animation-duration:.15s!important;animation-delay:0s!important;transform:translate(-50%,0)!important}}
 
@@ -378,7 +377,9 @@ html,body{width:100%;max-width:100%;overflow-x:clip}
 img,video,iframe{max-width:100%}
 img{height:auto}
 :focus-visible{outline:2px solid currentColor;outline-offset:4px}
-.top-hit{z-index:2;pointer-events:auto;cursor:default}
+.top-hit{z-index:2;pointer-events:auto;cursor:pointer}
+.top-hit-movie{right:calc(50% + 310px);width:auto}
+.top-hit-aisa{left:calc(50% + 310px);width:auto}
 .top-card{
   z-index:7;
   opacity:0;
@@ -397,7 +398,6 @@ img{height:auto}
   transition:opacity .42s ease,visibility 0s,clip-path 0s;
 }
 .top-mobile-worlds,.mobile-home-complete{display:none}
-.mobile-home-complete>img{display:block;width:100%;height:auto}
 
 .movie-design-page{min-width:0;width:100%;overflow-x:clip}
 .movie-design-header{align-items:flex-start}
@@ -437,8 +437,10 @@ img{height:auto}
 }
 
 @media(max-width:768px){
-  .top-gateway{height:auto;min-height:0;overflow:visible;background:#050416}
-  .top-art,.top-intro-dim,.top-owner,.top-copy,.top-brands,.top-hit,.top-card,.top-instruction{display:none!important}
+  .top-gateway{height:auto;min-height:0;aspect-ratio:941/1672;overflow:hidden;background:#050416}
+  .top-art{display:block!important}
+  .top-picture-image{object-fit:contain}
+  .top-art-shade,.top-intro-dim,.top-owner,.top-copy,.top-brands,.top-hit,.top-card,.top-instruction{display:none!important}
   .top-mobile-worlds{display:block}
   .top-mobile-world{position:relative;min-height:100svh;padding:72px 20px 30px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background-image:linear-gradient(180deg,#05030b18 15%,#05030bdb 78%),url("/top/top-normal.png");background-repeat:no-repeat;background-size:200% 100%;color:#fff}
   .top-mobile-world-movie{background-position:left center}
@@ -645,7 +647,7 @@ img{height:auto}
 
 /* Smartphone final density and navigation refinements */
 @keyframes mobileHomeDissolve{
-  from{opacity:0;transform:scale(.995)}
+  from{opacity:.72;transform:scale(.995)}
   to{opacity:1;transform:scale(1)}
 }
 @keyframes mobileBrandIn{
@@ -661,23 +663,16 @@ img{height:auto}
   .top-gateway>.top-copy{display:none!important}
   .top-mobile-worlds{display:none!important}
   .mobile-home-complete{
-    position:relative;
+    position:absolute;
+    inset:0;
     display:block;
     width:100%;
+    height:100%;
     max-width:100%;
     margin:0 auto;
     overflow:hidden;
     background:#050416;
     animation:mobileHomeDissolve .9s cubic-bezier(.22,1,.36,1) both;
-  }
-  .mobile-home-complete>img{
-    display:block;
-    width:100%;
-    max-width:100%;
-    height:auto;
-    aspect-ratio:9/16;
-    object-fit:contain;
-    pointer-events:none;
   }
   .mobile-home-owner,
   .mobile-home-brand{
@@ -754,8 +749,8 @@ img{height:auto}
     touch-action:manipulation;
     transition:transform .14s ease,background-color .14s ease,box-shadow .14s ease;
   }
-  .mobile-home-link--movie{top:11.8%;left:10.2%;width:36.5%;height:17.7%}
-  .mobile-home-link--aisa{top:74.7%;left:51.5%;width:33.6%;height:17.7%}
+  .mobile-home-link--movie{top:0;left:0;width:100%;height:41.2%;cursor:pointer}
+  .mobile-home-link--aisa{top:60%;left:0;width:100%;height:40%;cursor:pointer}
   .mobile-home-link--movie:active{
     transform:scale(.99);
     background:#ff9ab51f;

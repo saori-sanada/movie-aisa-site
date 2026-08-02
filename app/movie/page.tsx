@@ -4,9 +4,10 @@ import { MovieContactForm } from "../components/MovieContactForm";
 import { MovieHeader } from "../components/MovieHeader";
 import { MovieMotionCard } from "../components/MovieMotionCard";
 import { MovieRevealSection } from "../components/MovieRevealSection";
-import { MovieWorkCard } from "../components/MovieWorkCard";
+import { MovieWorksCarousel } from "../components/MovieWorksCarousel";
 import { moviePage } from "../data/moviePage";
 import { movieBrand } from "../data/movieBrand";
+import { movieWorks } from "../data/movieWorks";
 
 export default function MoviePage() {
   return (
@@ -51,18 +52,7 @@ export default function MoviePage() {
         </MovieRevealSection>
 
         <MovieRevealSection id="works" className="movie-design-section movie-design-works">
-          <div className="movie-design-heading"><span>WORKS</span><h2>制作実績</h2></div>
-          <div className="movie-design-work-grid">
-            {moviePage.works.map((work, index) => (
-              <div
-                className="movie-card-reveal movie-card-reveal-work"
-                key={work.title}
-                style={{ "--movie-card-delay": `${index * 70}ms` } as CSSProperties}
-              >
-                <MovieWorkCard work={work} />
-              </div>
-            ))}
-          </div>
+          <MovieWorksCarousel works={movieWorks} />
         </MovieRevealSection>
 
         <MovieRevealSection id="profile" className="movie-design-about">
