@@ -13,11 +13,16 @@ export function TopGateway() {
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const returning = sessionStorage.getItem("top-intro-seen") === "true";
+    let returning = false;
+    try {
+      returning = sessionStorage.getItem("portfolio-home-intro-viewed") === "true";
+      sessionStorage.setItem("portfolio-home-intro-viewed", "true");
+    } catch {
+      // Storage can be unavailable in privacy-restricted environments.
+    }
     const mode: Exclude<IntroMode, "pending"> = returning ? "short" : "full";
 
     setIntroMode(mode);
-    sessionStorage.setItem("top-intro-seen", "true");
 
     const close = (event: PointerEvent) => {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) setActive(null);

@@ -955,3 +955,47 @@ img{height:auto}
 @media(max-width:768px){
   .movie-design-page .movie-design-about-photo img{object-fit:cover!important;object-position:50% 42%!important}
 }
+
+/* HOME intro: presentation and interaction are intentionally independent. */
+.top-gateway .top-picture-image{filter:brightness(.9);opacity:1;transform:none}
+.top-gateway .top-brand{opacity:.88;transform:none;animation:none}
+.top-gateway .top-hit,.top-gateway .mobile-home-link{pointer-events:auto}
+.top-gateway .top-intro-dim{opacity:.28;background:#03030d40}
+.top-gateway .top-owner,.top-gateway .top-copy,.top-gateway .top-choice-guide{animation:none}
+.top-gateway .top-copy{opacity:0!important;animation:none!important}
+.top-gateway.is-intro-pending .top-owner,.top-gateway.is-intro-pending .top-copy,.top-gateway.is-intro-pending .top-choice-guide{opacity:0}
+.top-gateway.is-intro-full .top-picture-image{animation:homeSceneFull .5s ease-out both}
+.top-gateway.is-intro-full .top-intro-dim{animation:homeDimFull .5s ease-out both}
+.top-gateway.is-intro-full .top-owner{animation:homeOwnerFull .5s .15s cubic-bezier(.22,1,.36,1) both}
+.top-gateway.is-intro-full .top-choice-guide{animation:homeGuideFull .5s .3s ease-out both}
+.top-gateway.is-intro-full .top-choice-guide i{animation-duration:.5s;animation-delay:.3s}
+.top-gateway.is-intro-short .top-picture-image{animation:homeSceneShort .25s ease-out both}
+.top-gateway.is-intro-short .top-intro-dim{animation:homeDimShort .25s ease-out both}
+.top-gateway.is-intro-short .top-owner,.top-gateway.is-intro-short .top-choice-guide{animation:homeReturn .25s ease-out both}
+.top-gateway.is-intro-short .top-choice-guide i{animation-duration:.25s;animation-delay:0s}
+@keyframes homeSceneFull{from{filter:brightness(.9)}to{filter:brightness(1)}}
+@keyframes homeSceneShort{from{filter:brightness(.96)}to{filter:brightness(1)}}
+@keyframes homeDimFull{from{opacity:.28}to{opacity:0}}
+@keyframes homeDimShort{from{opacity:.12}to{opacity:0}}
+@keyframes homeOwnerFull{from{opacity:.35;transform:translate(-50%,5px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes homeCopyFull{from{opacity:0;transform:translate(-50%,calc(-50% + 7px))}to{opacity:1;transform:translate(-50%,-50%)}}
+@keyframes homeGuideFull{from{opacity:0}to{opacity:.72}}
+@keyframes homeReturn{from{opacity:.45}to{opacity:1}}
+
+@media(max-width:768px){
+  .top-gateway .mobile-home-brand{opacity:1;animation:none}
+  .top-gateway .mobile-home-owner{opacity:.86;animation:none}
+  .top-gateway.is-intro-pending .mobile-home-owner{opacity:.45}
+  .top-gateway.is-intro-full .mobile-home-owner{animation:homeMobileOwnerFull .5s .15s ease-out both}
+  .top-gateway.is-intro-short .mobile-home-owner{animation:homeMobileOwnerShort .25s ease-out both}
+  @keyframes homeMobileOwnerFull{from{opacity:.45}to{opacity:.86}}
+  @keyframes homeMobileOwnerShort{from{opacity:.65}to{opacity:.86}}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .top-gateway .top-picture-image,.top-gateway .top-intro-dim,.top-gateway .top-owner,.top-gateway .top-copy,.top-gateway .top-brand,.top-gateway .top-choice-guide,.top-gateway .top-choice-guide i,.top-gateway .mobile-home-owner,.top-gateway .mobile-home-brand{animation:none!important;transition:none!important}
+  .top-gateway .top-picture-image{filter:brightness(1)!important;opacity:1!important}
+  .top-gateway .top-intro-dim{opacity:0!important}
+  .top-gateway .top-owner,.top-gateway .top-brand,.top-gateway .top-choice-guide,.top-gateway .mobile-home-owner,.top-gateway .mobile-home-brand{opacity:1!important}
+  .top-gateway .top-copy{opacity:0!important}
+}
