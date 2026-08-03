@@ -170,6 +170,7 @@ export function MovieWorksCarousel({ works }: { works: MovieWork[] }) {
 
   const progressWidth = visibleCount / works.length * 100;
   const progressLeft = scrollProgress * (100 - progressWidth);
+  const rangeEnd = Math.min(works.length, currentIndex + visibleCount);
 
   return (
     <div className={styles.carousel} aria-roledescription="カルーセル" aria-label="制作実績">
@@ -177,6 +178,7 @@ export function MovieWorksCarousel({ works }: { works: MovieWork[] }) {
         <div className="movie-design-heading"><span>WORKS</span><h2>制作実績</h2></div>
         <div className={styles.controlGroup}>
           <span className={styles.hint}>DRAG / SCROLL</span>
+          <span className={styles.count}>{currentIndex + 1}–{rangeEnd} / {works.length}</span>
           <div className={styles.controls} aria-label="作品の表示操作">
             <button className={styles.arrow} type="button" aria-label="前の作品" disabled={currentIndex === 0} onClick={() => move(-1)}>←</button>
             <button className={styles.arrow} type="button" aria-label="次の作品" disabled={currentIndex >= maxIndex} onClick={() => move(1)}>→</button>
@@ -222,6 +224,7 @@ export function MovieWorksCarousel({ works }: { works: MovieWork[] }) {
           />
         ))}
       </div>
+      <p className={styles.mobileCount} aria-hidden="true">{currentIndex + 1} / {works.length}</p>
       <p className={styles.srOnly} aria-live="polite">{currentIndex + 1}番目の作品を表示中、全{works.length}作品</p>
     </div>
   );

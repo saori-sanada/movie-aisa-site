@@ -63,11 +63,13 @@ export default function MoviePage() {
           <div className="movie-design-about-copy">
             <div className="movie-design-heading movie-design-heading-left"><span>PROFILE</span><h2>{movieBrand.profile.name}</h2><small>{movieBrand.profile.nameEn}</small><em>{movieBrand.profile.role}</em></div>
             <h3>人の「好き」を、誰かへ届ける。</h3>
-            <p>動画編集からディレクション、SNS運用まで、<br />
-              「伝えること」を通して、<br />
-              人や企業の想いをカタチにするお手伝いをしています。<br />
-              視聴者の心に届く映像を、丁寧に、誠実に。<br />
-              一緒に、素敵な作品をつくりましょう。</p>
+            <div className="movie-profile-body">
+              <p>動画編集からディレクション、SNS運用まで。<br />「伝えること」を通して、人や企業の想いをカタチにするお手伝いをしています。</p>
+              <p>動画制作・ディレクション歴4年。累計1,000本以上の制作に携わり、企業YouTube6チャンネル以上の運営に参画してきました。</p>
+              <p>SNS運用では、9か月でフォロワー1万人達成に貢献。婚活プロフィール写真の撮影では、男性クライアントのプロフィールへのリーチ率と問い合わせ数が増加した事例もあります。</p>
+              <p>企画・編集・進行管理から外部パートナーとの連携まで、制作全体を見渡しながら支援します。</p>
+              <p>視聴者の心に届くクリエイティブを、丁寧に、誠実に。<br />一緒に、素敵な作品をつくりましょう。</p>
+            </div>
           </div>
         </MovieRevealSection>
 

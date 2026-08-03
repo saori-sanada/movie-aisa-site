@@ -61,6 +61,10 @@ export function TopGateway() {
     <Link className="top-hit top-hit-aisa" href="/aisa/" aria-label="aisaへ移動" onMouseEnter={() => activate("aisa")} />
 
     <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
+    <div className="top-choice-guide" aria-hidden="true">
+      <span className="top-choice-guide-desktop"><i>←</i> CHOOSE <i>→</i></span>
+      <span className="top-choice-guide-mobile"><i>↑</i><b>CHOOSE</b><i>↓</i></span>
+    </div>
 
     <div className="top-brands">
       <div className="top-brand top-brand-movie">
@@ -79,7 +83,7 @@ export function TopGateway() {
         key={brand}
         className={`top-card top-card-${brand}`}
         href={brand === "movie" ? "/movie/" : "/aisa/"}
-        aria-label={brand === "movie" ? "まなだMOViEのページを見る" : "AI自動化 aisaのページを見る"}
+        aria-label={brand === "movie" ? "まなだMOViEのページを見る" : "AI活用 aisaのページを見る"}
         onFocus={() => activate(brand)}
         onBlur={() => setActive(null)}
       >

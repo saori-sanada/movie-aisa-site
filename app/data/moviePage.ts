@@ -4,6 +4,7 @@ export const moviePage = {
     { label: "SERVICES", href: "#services", sectionId: "services" },
     { label: "WORKS", href: "#works", sectionId: "works" },
     { label: "PROFILE", href: "#profile", sectionId: "profile" },
+    { label: "CONTACT", href: "#contact", sectionId: "contact" },
     { label: "HOME", href: "/" },
   ],
   services: [

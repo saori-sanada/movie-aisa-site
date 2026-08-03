@@ -5,9 +5,10 @@
 }
 
 .headingRow {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
   gap: 32px;
 }
 
@@ -18,9 +19,19 @@
 }
 
 .controlGroup {
+  position: absolute;
+  right: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+.count {
+  color: #74534c;
+  font: 500 11px/1 Arial, sans-serif;
+  letter-spacing: .08em;
+  white-space: nowrap;
 }
 
 .hint {
@@ -170,6 +181,8 @@
   display: none;
 }
 
+.mobileCount { display: none; }
+
 .progress {
   position: relative;
   width: min(360px, 42%);
@@ -259,6 +272,15 @@
     display: flex;
     justify-content: center;
     gap: 8px;
+  }
+
+  .mobileCount {
+    display: block;
+    margin: 10px 0 0;
+    color: #a98a80;
+    font: 500 10px/1 Arial, sans-serif;
+    letter-spacing: .12em;
+    text-align: center;
   }
 
   .progress {

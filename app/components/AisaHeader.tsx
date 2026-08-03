@@ -1,20 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import type { MouseEvent } from "react";
-import { moviePage } from "../data/moviePage";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { aisaNavigation } from "../data/aisa";
+import styles from "../aisa/AisaPage.module.css";
 
-type SectionId = "movie-top" | "services" | "works" | "profile" | "contact";
+type SectionId = "aisa-top" | "services" | "works" | "profile" | "contact";
 
-export function MovieHeader() {
-  const [activeSection, setActiveSection] = useState<SectionId | null>("movie-top");
+export function AisaHeader() {
+  const [activeSection, setActiveSection] = useState<SectionId>("aisa-top");
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const sections = ["movie-top", "services", "works", "profile", "contact"]
+    const sections = ["aisa-top", "services", "works", "profile", "contact"]
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
     let frame = 0;
@@ -26,7 +26,7 @@ export function MovieHeader() {
           const rect = section.getBoundingClientRect();
           return rect.top <= marker && rect.bottom > marker;
         });
-        setActiveSection(current ? current.id as SectionId : null);
+        if (current) setActiveSection(current.id as SectionId);
       });
     };
     updateActiveSection();
@@ -40,7 +40,7 @@ export function MovieHeader() {
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("movie-menu-open", menuOpen);
+    document.body.classList.toggle("aisa-menu-open", menuOpen);
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
@@ -52,11 +52,9 @@ export function MovieHeader() {
     };
     document.addEventListener("keydown", closeOnEscape);
     document.addEventListener("pointerdown", closeOutside);
-    if (menuOpen) {
-      window.requestAnimationFrame(() => menuRef.current?.querySelector<HTMLElement>("nav a")?.focus());
-    }
+    if (menuOpen) window.requestAnimationFrame(() => menuRef.current?.querySelector<HTMLElement>("nav a")?.focus());
     return () => {
-      document.body.classList.remove("movie-menu-open");
+      document.body.classList.remove("aisa-menu-open");
       document.removeEventListener("keydown", closeOnEscape);
       document.removeEventListener("pointerdown", closeOutside);
     };
@@ -68,44 +66,43 @@ export function MovieHeader() {
       closeMenu();
       return;
     }
-
     event.preventDefault();
     closeMenu();
     const target = document.getElementById(href.slice(1));
     if (!target) return;
-
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.history.replaceState(null, "", href);
-      });
-    });
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", href);
+    }));
   };
 
   return (
-    <header className="movie-design-header" ref={menuRef}>
-      <a className="movie-mobile-brand" href="#movie-top" onClick={(event) => navigateToSection(event, "#movie-top")}>まなだMOViE</a>
+    <header className={styles.header} ref={menuRef}>
+      <a className={styles.mobileBrand} href="#aisa-top" aria-label="aisa（AI活用）トップ" onClick={(event) => navigateToSection(event, "#aisa-top")}>
+        <strong>aisa</strong><span>AI活用</span>
+      </a>
       <button
         ref={toggleRef}
-        className="movie-menu-toggle"
+        className={styles.menuToggle}
         type="button"
         aria-label={menuOpen ? "メニューを閉じる" : "メニューを開く"}
         aria-expanded={menuOpen}
-        aria-controls="movie-navigation"
+        aria-controls="aisa-navigation"
         onClick={() => setMenuOpen((open) => !open)}
       >
         <span /><span /><span />
       </button>
-      <nav id="movie-navigation" className={menuOpen ? "is-open" : ""} aria-label="まなだMOViE ナビゲーション">
-        {moviePage.navigation.map((item) => {
-          const active = "sectionId" in item && item.sectionId === activeSection;
-          const content = <span>{item.label}</span>;
-          return item.href.startsWith("/")
-            ? <Link key={item.href} href={item.href} onClick={closeMenu} className={active ? "is-active" : ""} aria-current={active ? "location" : undefined}>{content}</Link>
-            : <a key={item.href} href={item.href} onClick={(event) => navigateToSection(event, item.href)} className={active ? "is-active" : ""} aria-current={active ? "location" : undefined}>{content}</a>;
+      <nav id="aisa-navigation" className={menuOpen ? styles.menuOpen : ""} aria-label="aisa ページ内ナビゲーション">
+        {aisaNavigation.map((item) => {
+          const active = item.sectionId !== "home" && item.sectionId === activeSection;
+          return item.href.startsWith("/") ? (
+            <Link key={item.href} href={item.href} onClick={closeMenu}>{item.label}</Link>
+          ) : (
+            <a key={item.href} href={item.href} onClick={(event) => navigateToSection(event, item.href)} className={active ? styles.active : ""} aria-current={active ? "location" : undefined}>{item.label}</a>
+          );
         })}
       </nav>
-      {menuOpen && <button className="movie-menu-backdrop" type="button" aria-label="メニューを閉じる" onClick={closeMenu} />}
+      {menuOpen && <button className={styles.menuBackdrop} type="button" aria-label="メニューを閉じる" onClick={closeMenu} />}
     </header>
   );
 }
