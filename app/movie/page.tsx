@@ -23,7 +23,7 @@ export default function MoviePage() {
           <div className="movie-design-hero-art" role="img" aria-label="映像編集モニターの前に立つ女性クリエイター" />
           <div className="movie-design-hero-fade" aria-hidden="true" />
           <div className="movie-design-hero-copy">
-            <h1>想いを、映像に。</h1>
+            <h1>想いを、<span>映像に。</span></h1>
             <p>心を動かす物語を、<br />映像というカタチに。</p>
             <a className="movie-design-button movie-design-button-fill" href="#contact">お問い合わせ <span>→</span></a>
           </div>

@@ -10,9 +10,11 @@ type IntroMode = "pending" | "full" | "short";
 export function TopGateway() {
   const [active, setActive] = useState<ActiveBrand>(null);
   const [introMode, setIntroMode] = useState<IntroMode>("pending");
+  const [isInteractive, setIsInteractive] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    rootRef.current?.setAttribute("inert", "");
     let returning = false;
     try {
       returning = sessionStorage.getItem("portfolio-home-intro-viewed") === "true";
@@ -23,38 +25,73 @@ export function TopGateway() {
     const mode: Exclude<IntroMode, "pending"> = returning ? "short" : "full";
 
     setIntroMode(mode);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const interactionTimer = window.setTimeout(
+      () => {
+        setIsInteractive(true);
+        rootRef.current?.classList.add("is-interactive");
+        rootRef.current?.setAttribute("data-interactive", "true");
+        rootRef.current?.removeAttribute("inert");
+      },
+      reducedMotion ? 0 : mode === "full" ? 1300 : 300,
+    );
 
     const close = (event: PointerEvent) => {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) setActive(null);
     };
+    const followPointer = (event: PointerEvent) => {
+      const root = rootRef.current;
+      if (!root || event.pointerType !== "mouse" || root.getAttribute("data-interactive") !== "true") return;
+      const rect = root.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
+      const deadZone = Math.min(90, rect.width * 0.06);
+      if (event.clientX < center - deadZone) setActive("movie");
+      if (event.clientX > center + deadZone) setActive("aisa");
+    };
+    const followFocus = (event: FocusEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.classList.contains("top-hit-movie")) setActive("movie");
+      if (target.classList.contains("top-hit-aisa")) setActive("aisa");
+    };
+    rootRef.current?.addEventListener("pointermove", followPointer);
+    rootRef.current?.addEventListener("focusin", followFocus);
     document.addEventListener("pointerdown", close);
     return () => {
+      window.clearTimeout(interactionTimer);
+      rootRef.current?.removeAttribute("inert");
+      rootRef.current?.removeAttribute("data-interactive");
+      rootRef.current?.removeEventListener("pointermove", followPointer);
+      rootRef.current?.removeEventListener("focusin", followFocus);
       document.removeEventListener("pointerdown", close);
     };
   }, []);
 
   const activate = (brand: Exclude<ActiveBrand, null>) => {
+    if (!isInteractive) return;
     setActive(brand);
   };
 
   return <main ref={rootRef} className={`top-gateway is-intro-${introMode} is-ready${active ? ` is-${active}` : ""}`} onMouseLeave={() => setActive(null)} aria-label="真田紗織 ポートフォリオ">
     <div className="top-art" aria-hidden="true">
-      <picture className="top-picture">
-        <source media="(max-width: 768px)" srcSet="top/home-mobile-9x16.webp" />
-        <img
-          className="top-picture-image"
-          src="top/top-normal.webp"
-          alt=""
-          width="1672"
-          height="941"
-          loading="eager"
-          fetchPriority="high"
-        />
-      </picture>
+      {(["movie", "aisa"] as const).map((brand) => (
+        <picture key={brand} className={`top-picture top-picture-${brand}`}>
+          <source media="(max-width: 768px)" srcSet="top/home-mobile-9x16.webp" />
+          <img
+            className="top-picture-image"
+            src="top/top-normal.webp"
+            alt=""
+            width="1672"
+            height="941"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </picture>
+      ))}
       <div className="top-art-shade top-art-shade-movie" />
       <div className="top-art-shade top-art-shade-aisa" />
     </div>
     <div className="top-intro-dim" aria-hidden="true" />
+    <div className="top-intro-center-mask" aria-hidden="true" />
 
     <header className="top-identity"><span>{topContent.owner}</span><span>{topContent.role}</span></header>
     <div className="top-owner" aria-label={`${topContent.owner}, ${topContent.role}`}>
