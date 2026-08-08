@@ -1,0 +1,237 @@
+.carousel {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.viewport {
+  width: 100%;
+  margin-top: 46px;
+  padding: 12px 2px 30px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  contain: layout paint;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  touch-action: pan-x pan-y;
+  outline-offset: 6px;
+  cursor: grab;
+}
+
+.viewport:active {
+  cursor: grabbing;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.track,
+.group {
+  display: flex;
+  align-items: center;
+}
+
+.track {
+  width: max-content;
+}
+
+.group {
+  gap: 22px;
+  padding-right: 22px;
+}
+
+.slide {
+  flex: 0 0 clamp(280px, 27.5vw, 380px);
+  width: clamp(280px, 27.5vw, 380px);
+  min-width: 0;
+}
+
+.itemLink,
+.itemStatic {
+  display: block;
+  color: inherit;
+}
+
+.media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--work-background, #eee);
+  transform: translateY(0) scale(1);
+  transition: transform .32s cubic-bezier(.22, 1, .36, 1), box-shadow .32s ease;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform .36s cubic-bezier(.22, 1, .36, 1);
+}
+
+.itemLink:focus-visible {
+  outline: none;
+}
+
+.itemLink:focus-visible .media {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
+.movie .media {
+  border-radius: 12px;
+  box-shadow: 0 12px 30px #60453e1c;
+}
+
+.movie .itemLink {
+  color: #a96d70;
+}
+
+.aisa .media {
+  border-radius: 7px;
+  box-shadow: 0 13px 30px #24245b20;
+}
+
+.aisa .itemLink {
+  color: #755bd1;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 24%, #b39bff80 0 7%, transparent 26%),
+    linear-gradient(135deg, #111535 3%, #302267 53%, #7959dc 100%);
+}
+
+.placeholder::before,
+.placeholder::after,
+.placeholder i,
+.placeholder b {
+  position: absolute;
+  content: "";
+  display: block;
+}
+
+.placeholder::before {
+  inset: 14% 9% 18% 42%;
+  border: 1px solid #c9bcff66;
+  background: linear-gradient(155deg, #ffffff1c, #7562c73d);
+  box-shadow: 0 0 30px #8d73ff4d;
+  transform: perspective(400px) rotateY(-7deg);
+}
+
+.placeholder::after {
+  left: 9%;
+  bottom: 17%;
+  width: 26%;
+  height: 2px;
+  background: linear-gradient(90deg, #bdacff, transparent);
+  box-shadow: 0 -14px 0 #a796ec99, 0 -28px 0 #8d79db66;
+}
+
+.placeholder i {
+  top: 22%;
+  right: 15%;
+  width: 32%;
+  height: 42%;
+  border-right: 1px solid #d9cfff88;
+  border-bottom: 1px solid #d9cfff88;
+  transform: skewY(-16deg);
+}
+
+.placeholder b {
+  top: 22%;
+  left: 14%;
+  width: 12%;
+  aspect-ratio: 1;
+  border: 1px solid #c8baff88;
+  border-radius: 50%;
+  box-shadow: 0 0 22px #b198ff8f;
+}
+
+.slide:nth-child(4n + 2) .placeholder {
+  background:
+    radial-gradient(circle at 24% 26%, #8fdcff4a, transparent 29%),
+    linear-gradient(145deg, #101531, #49307f 57%, #846ae7);
+}
+
+.slide:nth-child(4n + 3) .placeholder {
+  background:
+    radial-gradient(circle at 72% 70%, #bd82ff55, transparent 31%),
+    linear-gradient(125deg, #151634, #382873 48%, #6650bd);
+}
+
+.slide:nth-child(4n + 4) .placeholder {
+  background:
+    radial-gradient(circle at 48% 18%, #a7d9ff38, transparent 25%),
+    linear-gradient(150deg, #10152e, #2c225e 48%, #7955cf);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .itemLink:hover .media,
+  .itemStatic:hover .media {
+    transform: translateY(-4px) scale(1.012);
+  }
+
+  .movie .itemLink:hover .media,
+  .movie .itemStatic:hover .media {
+    box-shadow: 0 19px 40px #60453e2b;
+  }
+
+  .aisa .itemLink:hover .media,
+  .aisa .itemStatic:hover .media {
+    box-shadow: 0 20px 42px #30206435;
+  }
+
+  .itemLink:hover .image,
+  .itemStatic:hover .image {
+    transform: scale(1.018);
+  }
+}
+
+@media (max-width: 768px) {
+  .viewport {
+    margin-top: 30px;
+    padding: 8px 0 22px;
+  }
+
+  .group {
+    gap: 14px;
+    padding-right: 14px;
+  }
+
+  .slide {
+    flex-basis: 78vw;
+    width: 78vw;
+  }
+
+  .movie .media {
+    border-radius: 10px;
+  }
+
+  .aisa .media {
+    border-radius: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media,
+  .image {
+    transition: none;
+  }
+}

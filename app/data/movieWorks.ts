@@ -7,6 +7,7 @@ export type MovieWork = {
   mediaType: "video" | "image";
   aspectRatio: "16:9" | "9:16" | "1:1";
   detailUrl: string | null;
+  detailEnabled: boolean;
   alt: string;
   backgroundColor: string;
 };
@@ -21,6 +22,7 @@ export const movieWorks = [
     mediaType: "video",
     aspectRatio: "16:9",
     detailUrl: null,
+    detailEnabled: false,
     alt: "美容ブランドのクリエイティブイメージ",
     backgroundColor: "#ead8d3",
   },
@@ -33,6 +35,7 @@ export const movieWorks = [
     mediaType: "video",
     aspectRatio: "16:9",
     detailUrl: null,
+    detailEnabled: false,
     alt: "映像制作の編集画面を映したビジネス動画のイメージ",
     backgroundColor: "#ded3cc",
   },
@@ -45,6 +48,7 @@ export const movieWorks = [
     mediaType: "video",
     aspectRatio: "9:16",
     detailUrl: null,
+    detailEnabled: false,
     alt: "飲食店PR動画を想定した縦型映像のイメージ",
     backgroundColor: "#ead6c7",
   },
@@ -57,6 +61,7 @@ export const movieWorks = [
     mediaType: "image",
     aspectRatio: "1:1",
     detailUrl: null,
+    detailEnabled: false,
     alt: "商品紹介クリエイティブを想定した正方形作品のイメージ",
     backgroundColor: "#e5d9d4",
   },
@@ -69,6 +74,7 @@ export const movieWorks = [
     mediaType: "video",
     aspectRatio: "16:9",
     detailUrl: null,
+    detailEnabled: false,
     alt: "AIコンセプトムービーのイメージ",
     backgroundColor: "#ded8e8",
   },
