@@ -104,8 +104,8 @@ export function TopGateway() {
 
     <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
     <div className="top-choice-guide" aria-hidden="true">
-      <span className="top-choice-guide-desktop"><i>←</i> CHOOSE <i>→</i></span>
-      <span className="top-choice-guide-mobile"><i>↑</i><b>CHOOSE</b><i>↓</i></span>
+      <span className="top-choice-guide-desktop"><i>←</i> CHOOSE YOUR PATH <i>→</i></span>
+      <span className="top-choice-guide-mobile"><i>↑</i><b>CHOOSE YOUR PATH</b><i>↓</i></span>
     </div>
 
     <div className="top-brands">

@@ -931,22 +931,22 @@ img{height:auto}
 }
 
 /* Final interaction cues: scoped to the HOME gateway. */
-.top-choice-guide{position:absolute;z-index:12;left:50%;bottom:8.5%;transform:translateX(-50%);color:#ffffffe0;font:500 10px/1 Arial,sans-serif;letter-spacing:.22em;text-shadow:0 2px 8px #000;pointer-events:none}
-.top-choice-guide-desktop{display:flex;align-items:center;gap:9px;white-space:nowrap}
+.top-choice-guide{position:absolute;z-index:12;left:50%;bottom:8.5%;transform:translateX(-50%);color:#f4f3f7;font:300 14px/1 Arial,sans-serif;letter-spacing:.25em;text-shadow:0 2px 10px #000;opacity:1;pointer-events:none}
+.top-choice-guide-desktop{display:flex;align-items:center;gap:12px;white-space:nowrap}
 .top-choice-guide-desktop i{font-style:normal;animation:topChoiceArrow .8s .25s cubic-bezier(.22,1,.36,1) both}
 .top-choice-guide-desktop i:first-child{--choice-shift:3px}.top-choice-guide-desktop i:last-child{--choice-shift:-3px}
 .top-choice-guide-mobile{display:none}
 @keyframes topChoiceArrow{from{transform:translateX(var(--choice-shift))}to{transform:translateX(0)}}
 @keyframes topChoiceVertical{from{transform:translateY(var(--choice-y))}to{transform:translateY(0)}}
 @media(max-width:768px){
-  .top-choice-guide{top:55%;bottom:auto;color:#ffffffe0;font-size:8px;letter-spacing:.18em;text-align:center}
+  .top-choice-guide{top:55%;bottom:auto;color:#f4f3f7;font-size:clamp(9px,2.8vw,11px);letter-spacing:.18em;text-align:center;white-space:nowrap}
   .top-choice-guide-desktop{display:none}
-  .top-choice-guide-mobile{display:flex;flex-direction:column;align-items:center;gap:5px}
-  .top-choice-guide-mobile b{font-weight:500}
+  .top-choice-guide-mobile{display:flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+  .top-choice-guide-mobile b{font-weight:300;white-space:nowrap}
   .top-choice-guide-mobile i{font-style:normal;line-height:1;animation:topChoiceVertical .8s .25s cubic-bezier(.22,1,.36,1) both}
   .top-choice-guide-mobile i:first-child{--choice-y:3px}.top-choice-guide-mobile i:last-child{--choice-y:-3px}
 }
-@media(prefers-reduced-motion:reduce){.top-choice-guide i{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.top-choice-guide i,.top-choice-guide-desktop,.top-choice-guide-mobile{animation:none!important}.top-choice-guide-desktop,.top-choice-guide-mobile{opacity:.86!important}}
 
 /* MOViE profile image framing: desktop only. */
 @media(min-width:769px){
@@ -1018,13 +1018,15 @@ img{height:auto}
 .top-gateway.is-intro-full .top-brand{animation:homeBrandMovieIn .65s .18s cubic-bezier(.22,1,.36,1) both}
 .top-gateway.is-intro-full .top-brand-aisa{animation-name:homeBrandAisaIn}
 .top-gateway.is-intro-full .top-owner{animation:homeOwnerRise .55s .65s cubic-bezier(.22,1,.36,1) both}
-.top-gateway.is-intro-full .top-choice-guide{animation:homeChoosePulse .25s .85s ease-out both}
+.top-gateway.is-intro-full .top-choice-guide{animation:homeChooseReveal .25s .85s ease-out both}
+.top-gateway.is-intro-full .top-choice-guide-desktop,.top-gateway.is-intro-full .top-choice-guide-mobile{animation:homeChoiceGuidePulse 1.6s 1.1s ease-in-out infinite}
 .top-gateway.is-intro-full .top-choice-guide i{animation-duration:.25s;animation-delay:.85s}
 .top-gateway.is-intro-short .top-picture{animation:homeReturnScene .3s ease-out both}
 .top-gateway.is-intro-short .top-intro-dim{animation:homeReturnDim .3s ease-out both}
 .top-gateway.is-intro-short .top-intro-center-mask{animation:homeCenterReveal .3s ease-out both}
 .top-gateway.is-intro-short .top-owner{animation:homeReturnOwner .3s ease-out both}
 .top-gateway.is-intro-short .top-choice-guide{animation:homeReturnGuide .3s ease-out both}
+.top-gateway.is-intro-short .top-choice-guide-desktop,.top-gateway.is-intro-short .top-choice-guide-mobile{animation:homeChoiceGuidePulse 1.6s .3s ease-in-out infinite}
 .top-gateway.is-intro-short .top-brand{opacity:1;transform:none;animation:none}
 @keyframes homeWorldMovieIn{from{opacity:0;transform:translateX(-40px);filter:brightness(.42)}to{opacity:1;transform:translateX(0);filter:brightness(1)}}
 @keyframes homeWorldAisaIn{from{opacity:0;transform:translateX(40px);filter:brightness(.42)}to{opacity:1;transform:translateX(0);filter:brightness(1)}}
@@ -1033,12 +1035,13 @@ img{height:auto}
 @keyframes homeBrandMovieIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
 @keyframes homeBrandAisaIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
 @keyframes homeOwnerRise{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
-@keyframes homeChoosePulse{0%{opacity:0}55%{opacity:.9}100%{opacity:.62}}
+@keyframes homeChooseReveal{from{opacity:0}to{opacity:1}}
+@keyframes homeChoiceGuidePulse{0%,100%{opacity:.7}50%{opacity:1}}
 @keyframes homeReturnScene{from{opacity:.82;filter:brightness(.82)}to{opacity:1;filter:brightness(1)}}
 @keyframes homeReturnDim{from{opacity:.2}to{opacity:0}}
 @keyframes homeReturnCopy{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes homeReturnOwner{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translate(-50%,0)}}
-@keyframes homeReturnGuide{from{opacity:0;transform:translate(-50%,6px)}to{opacity:.62;transform:translate(-50%,0)}}
+@keyframes homeReturnGuide{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translate(-50%,0)}}
 
 @media(max-width:1100px) and (min-width:769px){
   @keyframes homeWorldMovieIn{from{opacity:0;transform:translateX(-30px);filter:brightness(.42)}to{opacity:1;transform:translateX(0);filter:brightness(1)}}
@@ -1139,8 +1142,10 @@ img{height:auto}
   .top-gateway .mobile-home-link--aisa{grid-column:1;grid-row:3}
   .top-gateway .top-intro-center-mask{inset:40.6% 0;background:#03030d}
   .top-gateway .top-choice-guide{top:56.5%;bottom:auto;transform:translate(-50%,-50%)}
-  .top-gateway.is-intro-full .top-choice-guide{animation:homeMobileChooseTwice .4s .85s ease-out both}
+  .top-gateway.is-intro-full .top-choice-guide{animation:homeChooseReveal .4s .85s ease-out both}
+  .top-gateway.is-intro-full .top-choice-guide-mobile{animation:homeChoiceGuidePulse 1.6s 1.25s ease-in-out infinite}
   .top-gateway.is-intro-short .top-choice-guide{animation:homeMobileReturnGuide .3s ease-out both}
+  .top-gateway.is-intro-short .top-choice-guide-mobile{animation:homeChoiceGuidePulse 1.6s .3s ease-in-out infinite}
   @keyframes homeMobileChooseTwice{
     0%{opacity:0}
     25%{opacity:.72}
@@ -1150,7 +1155,7 @@ img{height:auto}
   }
   @keyframes homeMobileReturnGuide{
     from{opacity:0;transform:translate(-50%,calc(-50% + 6px))}
-    to{opacity:.62;transform:translate(-50%,-50%)}
+    to{opacity:1;transform:translate(-50%,-50%)}
   }
   .movie-design-hero-copy h1 span{white-space:nowrap}
 }
