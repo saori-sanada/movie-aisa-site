@@ -158,10 +158,11 @@
 .serviceCard{min-width:0;min-height:330px;padding:30px 22px 24px;display:flex;flex-direction:column;align-items:center;border:1px solid #ece8ff;border-radius:10px;background:#fff;box-shadow:0 10px 35px #5e49bd14;text-align:center;outline-offset:4px;transition:transform .38s cubic-bezier(.22,1,.36,1),box-shadow .38s ease,border-color .38s ease}
 .serviceCard:hover,.serviceCard:focus-visible{z-index:4;border-color:#c6b7ff;box-shadow:0 34px 68px #4937a34f;transform:translateY(-16px) scale(1.025)}
 .serviceCard:active{transform:translateY(-4px) scale(.995)}
-.serviceIcon{width:52px;height:52px;display:grid;place-items:center;border:1px solid #a58bff;border-radius:50%;color:#7657ec;font:600 16px/1 Arial,sans-serif;transition:transform .38s ease}
+.serviceIcon{width:52px;height:52px;display:grid;place-items:center;border:1px solid #8e82ef;border-radius:50%;color:#f7f5ff;background:linear-gradient(145deg,#172465,#674cdf);box-shadow:0 8px 20px #4030a32b;font:600 16px/1 Arial,sans-serif;transition:transform .38s ease}
+.serviceIcon svg{display:block;width:34px;height:34px}
 .serviceCard:hover .serviceIcon,.serviceCard:focus-visible .serviceIcon{transform:scale(1.07)}
-.serviceCard h3{min-height:50px;margin:22px 0 8px;display:flex;align-items:center;font-size:18px;font-weight:500;line-height:1.45}
-.serviceCard p{margin:0;color:#39364f;font-size:13px;line-height:1.8}.serviceCard p span{display:block}
+.serviceCard h3{min-height:50px;margin:22px 0 8px;display:flex;align-items:center;font-size:18px;font-weight:500;line-height:1.45;line-break:strict}
+.serviceCard p{margin:0;color:#39364f;font-size:13px;line-height:1.8;line-break:strict}.serviceCard p span{display:block;white-space:nowrap}
 
 .works{text-align:center;background:radial-gradient(circle at 50% 18%,#a48bff17,transparent 42%),#f9f8ff}
 .workGrid{width:min(1240px,100%);margin:38px auto 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;text-align:left;overflow:visible}
@@ -188,6 +189,7 @@
 .contact{min-height:380px;padding:70px 6.5% 78px;background:linear-gradient(145deg,#fff,#f6f3ff)}
 .contactInner{width:min(760px,100%);margin:auto;padding:44px clamp(24px,5vw,54px);border:1px solid #e4def8;background:#fff;box-shadow:0 18px 55px #30255d14;text-align:center}
 .contactInner p{margin:24px auto 30px;color:#4d4962;font-size:15px;line-height:2;letter-spacing:.04em}
+.contactMessage{margin:24px auto 30px}.contactMessage p{margin:0 0 18px}.contactMessage p:last-child{margin-bottom:0}.contactMessage p span{display:block}
 
 .revealSection{opacity:1;transform:none}
 .revealSection .heading,.revealSection .profilePhoto,.revealSection .profileCopy,.revealSection .contactInner{opacity:0;transform:translateY(22px);transition:opacity .48s cubic-bezier(.22,1,.36,1),transform .48s cubic-bezier(.22,1,.36,1)}
@@ -200,7 +202,7 @@
 @keyframes heroItemIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
 @media(max-width:1100px) and (min-width:769px){
-  .serviceGrid{gap:10px}.serviceCard{padding-inline:13px}.serviceCard h3{font-size:15px}.serviceCard p{font-size:11px}
+  .serviceGrid{gap:10px}.serviceCard{padding-inline:13px}.serviceCard h3{font-size:15px}.serviceCard p{font-size:11px}.serviceCard p span{white-space:normal;word-break:normal;overflow-wrap:break-word}
   .workGrid{gap:14px}.workCard h3{font-size:14px}.workCard p{font-size:11px}
   .dataPanelChart,.dataPanelCode{right:3%}.heroPortrait{right:22%}
 }
@@ -234,7 +236,7 @@
 
   .section{padding:34px clamp(16px,5vw,24px)}.heading h2{font-size:clamp(27px,7vw,34px)}
   .serviceGrid,.workGrid{grid-template-columns:1fr;gap:14px;width:100%;margin-top:28px}
-  .serviceCard{min-height:0;padding:22px 22px 26px;align-items:flex-start;text-align:left}.serviceCard h3{min-height:0;margin:17px 0 10px;font-size:19px}.serviceCard p{font-size:14px;line-height:1.75}
+  .serviceCard{min-height:0;padding:22px 22px 26px;align-items:flex-start;text-align:left}.serviceCard h3{min-height:0;margin:17px 0 10px;font-size:19px}.serviceCard p{font-size:14px;line-height:1.75}.serviceCard p span{white-space:normal;word-break:normal;overflow-wrap:break-word;line-break:strict}
   .serviceCard:hover,.serviceCard:focus-visible,.workCard:hover,.workCard:focus-visible{transform:none;box-shadow:0 10px 35px #5e49bd14}.serviceCard:active,.workCard:active{transform:translateY(-3px);box-shadow:0 16px 34px #5e49bd25}
   .workGrid{gap:22px}.workCard{padding:0 0 8px;background:#fff;box-shadow:0 10px 26px #28206412}.workCard h3,.workCard p{margin-right:18px;margin-left:18px}.workCard h3{font-size:18px}.workCard p{margin-bottom:14px;font-size:14px}
 

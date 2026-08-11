@@ -6,8 +6,11 @@ import {
   useCallback,
   useEffect,
   useRef,
+  useState,
   type CSSProperties,
   type FocusEvent,
+  type KeyboardEvent,
+  type MouseEvent,
   type PointerEvent,
   type ReactNode,
 } from "react";
@@ -32,63 +35,133 @@ type WorksAutoMarqueeProps = {
 };
 
 const COPIES = [0, 1, 2] as const;
-const RESUME_DELAY_MS = 850;
-const SECONDS_PER_ITEM = 5;
+const FIRST_AUTOPLAY_DELAY_MS = 1800;
+const AUTOPLAY_DELAY_MS = 2500;
+const SLIDE_DURATION_MS = 550;
+const SWIPE_CLICK_THRESHOLD_PX = 10;
+
+const modulo = (value: number, length: number) => ((value % length) + length) % length;
 
 export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const primaryGroupRef = useRef<HTMLDivElement>(null);
-  const loopWidthRef = useRef(0);
   const itemStepRef = useRef(1);
-  const frameRef = useRef<number | null>(null);
-  const lastTimeRef = useRef<number | null>(null);
+  const slideAnimationRef = useRef<Animation | null>(null);
+  const autoplayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const animatingRef = useRef(false);
   const pausedRef = useRef(false);
   const hoveredRef = useRef(false);
-  const touchingRef = useRef(false);
+  const visibleRef = useRef(false);
+  const readyRef = useRef(false);
+  const hasStartedAutoplayRef = useRef(false);
   const reducedMotionRef = useRef(false);
-  const hoverCapableRef = useRef(false);
-  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
+  const pointerMovedRef = useRef(false);
+  const suppressClickUntilRef = useRef(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [carouselReady, setCarouselReady] = useState(false);
 
-  const clearResumeTimer = useCallback(() => {
-    if (resumeTimerRef.current !== null) {
-      clearTimeout(resumeTimerRef.current);
-      resumeTimerRef.current = null;
+  const clearAutoplay = useCallback(() => {
+    if (autoplayTimerRef.current !== null) {
+      clearTimeout(autoplayTimerRef.current);
+      autoplayTimerRef.current = null;
     }
   }, []);
 
-  const setPaused = useCallback((paused: boolean) => {
-    pausedRef.current = paused;
-    lastTimeRef.current = null;
-  }, []);
+  const normalizePosition = useCallback((logicalIndex?: number) => {
+    const viewport = viewportRef.current;
+    if (!viewport || items.length === 0) return;
+    const step = itemStepRef.current;
+    const currentAbsolute = Math.round(viewport.scrollLeft / step);
+    const logical = logicalIndex ?? modulo(currentAbsolute, items.length);
+    viewport.scrollLeft = (items.length + logical) * step;
+    setActiveIndex(logical);
+  }, [items.length]);
+
+  const scheduleAutoplayRef = useRef<(delay?: number) => void>(() => undefined);
+
+  const animateTo = useCallback((absoluteIndex: number, logicalIndex: number) => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track || !readyRef.current || animatingRef.current || items.length === 0) return;
+    clearAutoplay();
+    slideAnimationRef.current?.cancel();
+
+    const start = viewport.scrollLeft;
+    const target = absoluteIndex * itemStepRef.current;
+    const distance = target - start;
+    animatingRef.current = true;
+    setIsAnimating(true);
+    viewport.classList.add(styles.animating);
+    const animation = track.animate(
+      [
+        { transform: "translate3d(0, 0, 0)" },
+        { transform: `translate3d(${-distance}px, 0, 0)` },
+      ],
+      { duration: SLIDE_DURATION_MS, easing: "cubic-bezier(.45, 0, .55, 1)", fill: "forwards" },
+    );
+    slideAnimationRef.current = animation;
+    animation.onfinish = () => {
+      viewport.scrollLeft = target;
+      animation.cancel();
+      slideAnimationRef.current = null;
+      animatingRef.current = false;
+      setIsAnimating(false);
+      viewport.classList.remove(styles.animating);
+      normalizePosition(logicalIndex);
+      scheduleAutoplayRef.current();
+    };
+  }, [clearAutoplay, items.length, normalizePosition]);
+
+  const moveBy = useCallback((direction: -1 | 1) => {
+    const viewport = viewportRef.current;
+    if (!viewport || animatingRef.current || items.length === 0) return;
+    const currentAbsolute = Math.round(viewport.scrollLeft / itemStepRef.current);
+    const targetAbsolute = currentAbsolute + direction;
+    animateTo(targetAbsolute, modulo(targetAbsolute, items.length));
+  }, [animateTo, items.length]);
+
+  const moveTo = useCallback((logicalIndex: number) => {
+    if (animatingRef.current || items.length === 0) return;
+    animateTo(items.length + logicalIndex, logicalIndex);
+  }, [animateTo, items.length]);
+
+  const scheduleAutoplay = useCallback((delay = AUTOPLAY_DELAY_MS) => {
+    clearAutoplay();
+    if (!readyRef.current || !visibleRef.current || pausedRef.current || reducedMotionRef.current || items.length < 2) return;
+    autoplayTimerRef.current = setTimeout(() => {
+      const viewport = viewportRef.current;
+      const hoverCapable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      if (viewport && hoverCapable && viewport.matches(":hover")) {
+        scheduleAutoplayRef.current();
+        return;
+      }
+      moveBy(1);
+    }, delay);
+  }, [clearAutoplay, items.length, moveBy]);
+
+  useEffect(() => {
+    scheduleAutoplayRef.current = scheduleAutoplay;
+  }, [scheduleAutoplay]);
 
   const measure = useCallback(() => {
     const viewport = viewportRef.current;
     const group = primaryGroupRef.current;
     if (!viewport || !group || items.length === 0) return;
-
     const slides = group.querySelectorAll<HTMLElement>("[data-work-slide]");
     const first = slides[0];
     const second = slides[1];
-    const step = first
-      ? second
-        ? second.offsetLeft - first.offsetLeft
-        : first.offsetWidth
-      : 1;
-    const loopWidth = group.offsetWidth;
-
-    itemStepRef.current = Math.max(1, step);
-    loopWidthRef.current = loopWidth;
-
-    if (loopWidth > 0 && (viewport.scrollLeft < loopWidth * 0.5 || viewport.scrollLeft >= loopWidth * 2.5)) {
-      viewport.scrollLeft = loopWidth;
-    }
-  }, [items.length]);
+    itemStepRef.current = Math.max(1, second ? second.offsetLeft - first.offsetLeft : first?.offsetWidth ?? 1);
+    normalizePosition(activeIndex);
+  }, [activeIndex, items.length, normalizePosition]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
     const group = primaryGroupRef.current;
     if (!viewport || !group) return;
-
     const observer = new ResizeObserver(measure);
     observer.observe(viewport);
     observer.observe(group);
@@ -97,79 +170,161 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
   }, [measure]);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const hoverMedia = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const updateMotionPreference = () => {
-      reducedMotionRef.current = media.matches;
-      lastTimeRef.current = null;
-    };
-    const updateHoverCapability = () => {
-      hoverCapableRef.current = hoverMedia.matches;
-    };
-    updateMotionPreference();
-    updateHoverCapability();
-    media.addEventListener("change", updateMotionPreference);
-    hoverMedia.addEventListener("change", updateHoverCapability);
-
-    const tick = (time: number) => {
-      const viewport = viewportRef.current;
-      const loopWidth = loopWidthRef.current;
-      const previousTime = lastTimeRef.current;
-
-      const hovered = Boolean(viewport && hoverCapableRef.current && viewport.matches(":hover"));
-      if (viewport && loopWidth > 0 && !pausedRef.current && !hovered && !reducedMotionRef.current && previousTime !== null) {
-        const elapsed = Math.min(48, time - previousTime);
-        const pixelsPerMillisecond = itemStepRef.current / (SECONDS_PER_ITEM * 1000);
-        viewport.scrollLeft += elapsed * pixelsPerMillisecond;
-
-        if (viewport.scrollLeft >= loopWidth * 2) viewport.scrollLeft -= loopWidth;
-        if (viewport.scrollLeft < loopWidth * 0.5) viewport.scrollLeft += loopWidth;
+    const group = primaryGroupRef.current;
+    if (!group || readyRef.current) return;
+    let cancelled = false;
+    const prepareCarousel = async () => {
+      const initialImages = Array.from(group.querySelectorAll("img")).slice(0, Math.min(4, items.length));
+      await Promise.all(initialImages.map(async (image) => {
+        if (!image.complete) {
+          await new Promise<void>((resolve) => {
+            image.addEventListener("load", () => resolve(), { once: true });
+            image.addEventListener("error", () => resolve(), { once: true });
+          });
+        }
+        await image.decode?.().catch(() => undefined);
+      }));
+      await document.fonts?.ready;
+      await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      if (cancelled) return;
+      measure();
+      readyRef.current = true;
+      setCarouselReady(true);
+      if (visibleRef.current) {
+        const delay = hasStartedAutoplayRef.current ? AUTOPLAY_DELAY_MS : FIRST_AUTOPLAY_DELAY_MS;
+        hasStartedAutoplayRef.current = true;
+        scheduleAutoplayRef.current(delay);
       }
-
-      lastTimeRef.current = time;
-      frameRef.current = window.requestAnimationFrame(tick);
     };
+    void prepareCarousel();
+    return () => { cancelled = true; };
+  }, [items.length, measure]);
 
-    frameRef.current = window.requestAnimationFrame(tick);
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotion = () => {
+      reducedMotionRef.current = motion.matches;
+      scheduleAutoplayRef.current();
+    };
+    const trackMousePosition = (event: globalThis.PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      const viewport = viewportRef.current;
+      if (!viewport) return;
+      const rect = viewport.getBoundingClientRect();
+      const isInside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+      if (isInside === hoveredRef.current) return;
+      hoveredRef.current = isInside;
+      if (isInside) {
+        pausedRef.current = true;
+        clearAutoplay();
+      } else if (!viewport.contains(document.activeElement)) {
+        pausedRef.current = false;
+        scheduleAutoplayRef.current();
+      }
+    };
+    updateMotion();
+    motion.addEventListener("change", updateMotion);
+    document.addEventListener("pointermove", trackMousePosition);
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      visibleRef.current = entry.isIntersecting;
+      if (!entry.isIntersecting) {
+        clearAutoplay();
+        return;
+      }
+      if (!readyRef.current) return;
+      const delay = hasStartedAutoplayRef.current ? AUTOPLAY_DELAY_MS : FIRST_AUTOPLAY_DELAY_MS;
+      hasStartedAutoplayRef.current = true;
+      scheduleAutoplayRef.current(delay);
+    }, { threshold: 0.2 });
+    visibilityObserver.observe(viewport);
     return () => {
-      media.removeEventListener("change", updateMotionPreference);
-      hoverMedia.removeEventListener("change", updateHoverCapability);
-      if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
-      clearResumeTimer();
+      motion.removeEventListener("change", updateMotion);
+      document.removeEventListener("pointermove", trackMousePosition);
+      visibilityObserver.disconnect();
+      clearAutoplay();
+      if (scrollEndTimerRef.current !== null) clearTimeout(scrollEndTimerRef.current);
+      slideAnimationRef.current?.cancel();
     };
-  }, [clearResumeTimer]);
+  }, [clearAutoplay, scheduleAutoplay]);
 
-  const pause = () => {
-    clearResumeTimer();
-    setPaused(true);
+  const handleScroll = () => {
+    if (animatingRef.current || items.length === 0) return;
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const logical = modulo(Math.round(viewport.scrollLeft / itemStepRef.current), items.length);
+    setActiveIndex(logical);
+    if (scrollEndTimerRef.current !== null) clearTimeout(scrollEndTimerRef.current);
+    scrollEndTimerRef.current = setTimeout(() => {
+      normalizePosition(logical);
+      scheduleAutoplay();
+    }, 180);
   };
 
-  const resumeWhenReady = (delay = 0) => {
-    clearResumeTimer();
-    resumeTimerRef.current = setTimeout(() => {
-      if (!hoveredRef.current && !touchingRef.current) setPaused(false);
-    }, delay);
+  const pause = () => {
+    pausedRef.current = true;
+    clearAutoplay();
+  };
+
+  const resume = () => {
+    pausedRef.current = false;
+    scheduleAutoplay();
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === "touch" || event.pointerType === "pen") touchingRef.current = true;
+    if (event.pointerType === "mouse") return;
+    pointerStartRef.current = { x: event.clientX, y: event.clientY };
+    pointerMovedRef.current = false;
     pause();
   };
 
-  const handlePointerEnd = (event: PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === "touch" || event.pointerType === "pen") {
-      touchingRef.current = false;
-      resumeWhenReady(RESUME_DELAY_MS);
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse") {
+      pause();
+      return;
     }
+    const start = pointerStartRef.current;
+    if (!start) return;
+    if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > SWIPE_CLICK_THRESHOLD_PX) {
+      pointerMovedRef.current = true;
+    }
+  };
+
+  const handlePointerEnd = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse") return;
+    if (pointerMovedRef.current) suppressClickUntilRef.current = Date.now() + 400;
+    pointerStartRef.current = null;
+    resume();
+  };
+
+  const handleClickCapture = (event: MouseEvent<HTMLDivElement>) => {
+    if (pointerMovedRef.current || Date.now() < suppressClickUntilRef.current) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    pointerMovedRef.current = false;
   };
 
   const handleFocus = () => pause();
   const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
-    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) resumeWhenReady();
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) resume();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      moveBy(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      moveBy(1);
+    }
   };
 
   const renderItem = (item: WorksMarqueeItem, copyIndex: number, itemIndex: number) => {
     const isPrimaryCopy = copyIndex === 1;
+    const isInitialThumbnail = isPrimaryCopy && itemIndex < 4;
     const media = item.thumbnail ? (
       <Image
         className={styles.image}
@@ -177,7 +332,8 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
         alt={isPrimaryCopy ? item.alt : ""}
         fill
         draggable={false}
-        sizes="(max-width: 768px) 78vw, (max-width: 1100px) 29vw, 380px"
+        priority={isInitialThumbnail}
+        sizes="(max-width: 768px) 78vw, (max-width: 1100px) 30vw, 400px"
       />
     ) : (
       <span className={styles.placeholder} role={isPrimaryCopy ? "img" : undefined} aria-label={isPrimaryCopy ? item.alt : undefined}>
@@ -187,10 +343,7 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
     );
 
     const content = (
-      <span
-        className={styles.media}
-        style={{ "--work-background": item.backgroundColor } as MarqueeStyle}
-      >
+      <span className={styles.media} style={{ "--work-background": item.backgroundColor } as MarqueeStyle}>
         {media}
       </span>
     );
@@ -215,31 +368,31 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
   };
 
   return (
-    <div className={`${styles.carousel} ${styles[brand]}`}>
+    <div className={`${styles.carousel} ${styles[brand]}`} data-carousel-ready={carouselReady} aria-busy={!carouselReady}>
       {heading}
+      <div className={styles.controls} aria-label="制作実績のスライド操作">
+        <button type="button" className={styles.arrow} onClick={() => moveBy(-1)} disabled={isAnimating} aria-label="前の作品を見る">←</button>
+        <button type="button" className={styles.arrow} onClick={() => moveBy(1)} disabled={isAnimating} aria-label="次の作品を見る">→</button>
+      </div>
       <div
         ref={viewportRef}
         className={styles.viewport}
         role="region"
-        aria-label="制作実績。横方向にスクロールして閲覧できます"
+        aria-label={`制作実績カルーセル。全${items.length}作品中${activeIndex + 1}作品目`}
         tabIndex={0}
-        onPointerEnter={(event) => {
-          if (event.pointerType !== "mouse") return;
-          hoveredRef.current = true;
-          pause();
-        }}
-        onPointerLeave={(event) => {
-          if (event.pointerType !== "mouse") return;
-          hoveredRef.current = false;
-          resumeWhenReady();
-        }}
+        onScroll={handleScroll}
+        onMouseEnter={() => { hoveredRef.current = true; pause(); }}
+        onMouseLeave={() => { hoveredRef.current = false; resume(); }}
         onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
+        onClickCapture={handleClickCapture}
         onFocusCapture={handleFocus}
         onBlurCapture={handleBlur}
+        onKeyDown={handleKeyDown}
       >
-        <div className={styles.track}>
+        <div ref={trackRef} className={styles.track}>
           {COPIES.map((copyIndex) => (
             <div
               ref={copyIndex === 1 ? primaryGroupRef : undefined}
@@ -252,6 +405,20 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
           ))}
         </div>
       </div>
+      <div className={styles.dots} role="group" aria-label="作品位置">
+        {items.map((item, index) => (
+          <button
+            type="button"
+            className={`${styles.dot}${index === activeIndex ? ` ${styles.activeDot}` : ""}`}
+            aria-label={`${index + 1}作品目へ移動`}
+            aria-current={index === activeIndex ? "true" : undefined}
+            onClick={() => moveTo(index)}
+            disabled={isAnimating}
+            key={item.slug}
+          />
+        ))}
+      </div>
+      <p className={styles.status} aria-live="polite">{items.length}作品中 {activeIndex + 1}作品目</p>
     </div>
   );
 }

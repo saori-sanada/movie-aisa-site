@@ -16,6 +16,7 @@
   touch-action: pan-x pan-y;
   outline-offset: 6px;
   cursor: grab;
+  scroll-snap-type: x mandatory;
 }
 
 .viewport:active {
@@ -24,6 +25,60 @@
 
 .viewport::-webkit-scrollbar {
   display: none;
+}
+
+.viewport.animating {
+  scroll-snap-type: none;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px 4px 0;
+}
+
+.arrow {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 17px;
+  line-height: 1;
+  transition: transform .2s ease, background-color .2s ease, opacity .2s ease;
+}
+
+.arrow:hover {
+  transform: translateY(-2px);
+}
+
+.arrow:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.movie .arrow {
+  color: #76564f;
+  border-color: #b9878d35;
+  background: #fff8f8;
+}
+
+.movie .arrow:hover {
+  background: #f6e1e4;
+}
+
+.aisa .arrow {
+  color: #4b3c91;
+  border-color: #7561c73d;
+  background: #f7f4ff;
+}
+
+.aisa .arrow:hover {
+  background: #e9e2ff;
 }
 
 .track,
@@ -42,9 +97,11 @@
 }
 
 .slide {
-  flex: 0 0 clamp(280px, 27.5vw, 380px);
-  width: clamp(280px, 27.5vw, 380px);
+  flex: 0 0 clamp(290px, 29vw, 400px);
+  width: clamp(290px, 29vw, 400px);
   min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .itemLink,
@@ -182,6 +239,61 @@
   border: 0;
 }
 
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+  margin-top: 2px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: width .2s ease, background-color .2s ease, opacity .2s ease;
+}
+
+.dot.activeDot {
+  width: 19px;
+  border-radius: 999px;
+  opacity: 1;
+}
+
+.movie .dot {
+  background: #d9c0b8;
+  opacity: .7;
+}
+
+.movie .dot.activeDot {
+  background: #b9787f;
+}
+
+.aisa .dot {
+  background: #c9c0e5;
+  opacity: .7;
+}
+
+.aisa .dot.activeDot {
+  background: #7359ce;
+}
+
+.status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .itemLink:hover .media,
   .itemStatic:hover .media {
@@ -205,6 +317,10 @@
 }
 
 @media (max-width: 768px) {
+  .controls {
+    display: none;
+  }
+
   .viewport {
     margin-top: 30px;
     padding: 8px 0 22px;
@@ -230,6 +346,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .dot,
   .media,
   .image {
     transition: none;

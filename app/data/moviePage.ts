@@ -8,10 +8,10 @@ export const moviePage = {
     { label: "HOME", href: "/" },
   ],
   services: [
-    { icon: "▰", title: "動画制作", description: "YouTube、ショート動画、PR動画などの企画・編集" },
-    { icon: "▯", title: "SNS運用", description: "Instagram、YouTubeなどの投稿制作・運用サポート" },
-    { icon: "◇", title: "デザイン制作", description: "フィード投稿、記事画像、EC商品画像などの制作" },
-    { icon: "●●", title: "ディレクション", description: "企画、進行管理、品質管理、編集者との連携" },
-    { icon: "✦", title: "AIクリエイティブ", description: "AIを活用した動画制作、画像生成、クリエイティブ制作" },
+    { icon: "video", title: "動画制作", lines: ["YouTube・ショート動画・PR動画など、", "企画から編集まで一貫して対応"] },
+    { icon: "social", title: "SNS運用", lines: ["Instagram・YouTubeを中心に、", "投稿制作から運用サポートまで対応"] },
+    { icon: "design", title: "デザイン制作", lines: ["サムネイル・SNS投稿画像・記事画像など、", "用途に合わせたビジュアルを制作"] },
+    { icon: "direction", title: "ディレクション", lines: ["企画・進行管理・品質管理から、", "編集者や外部パートナーとの連携まで"] },
+    { icon: "creative", title: "AIクリエイティブ", lines: ["AIを活用した広告動画・イメージ映像など、", "企画から生成・編集まで対応"] },
   ],
 };

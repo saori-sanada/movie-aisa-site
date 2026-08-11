@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import { AisaHeader } from "../components/AisaHeader";
 import { AisaRevealSection } from "../components/AisaRevealSection";
+import { AisaServiceIcon } from "../components/AisaServiceIcon";
 import { AisaWorksCarousel } from "../components/AisaWorksCarousel";
 import { aisaContact, aisaProfile, aisaServices, aisaWorks } from "../data/aisa";
 import styles from "./AisaPage.module.css";
@@ -25,7 +26,7 @@ export default function AisaPage() {
 
           <div className={styles.heroCopy}>
             <h1>可能性を、未来へ。</h1>
-            <p>AIで、あなたの「やりたい」を<br />実現できる未来へ。</p>
+            <p>AIで、あなたの「やりたい」を<br />実現できる仕組みへ。</p>
             <a className={`${styles.button} ${styles.buttonFill}`} href="#contact">
               お問い合わせ <span aria-hidden="true">→</span>
             </a>
@@ -42,7 +43,7 @@ export default function AisaPage() {
                 style={{ "--aisa-card-delay": `${index * 55}ms` } as CSSProperties}
                 tabIndex={0}
               >
-                <span className={styles.serviceIcon} aria-hidden="true">{service.icon}</span>
+                <span className={styles.serviceIcon} aria-hidden="true"><AisaServiceIcon name={service.icon} /></span>
                 <h3>{service.title}</h3>
                 <p>{service.lines.map((line) => <span key={line}>{line}</span>)}</p>
               </article>
@@ -72,7 +73,11 @@ export default function AisaPage() {
         <AisaRevealSection id="contact" className={styles.contact}>
           <div className={styles.contactInner}>
             <div className={styles.heading}><span>CONTACT</span><h2>{aisaContact.heading}</h2></div>
-            <p>{aisaContact.message}</p>
+            <div className={styles.contactMessage}>
+              {aisaContact.paragraphs.map((paragraph) => (
+                <p key={paragraph[0]}>{paragraph.map((line) => <span key={line}>{line}</span>)}</p>
+              ))}
+            </div>
             <span className={`${styles.button} ${styles.buttonOutline} ${styles.pending}`} aria-disabled="true">
               お問い合わせ <span aria-hidden="true">→</span>
             </span>

@@ -4,6 +4,7 @@ import { MovieContactForm } from "../components/MovieContactForm";
 import { MovieHeader } from "../components/MovieHeader";
 import { MovieMotionCard } from "../components/MovieMotionCard";
 import { MovieRevealSection } from "../components/MovieRevealSection";
+import { MovieServiceIcon } from "../components/MovieServiceIcon";
 import { MovieWorksCarousel } from "../components/MovieWorksCarousel";
 import { moviePage } from "../data/moviePage";
 import { movieBrand } from "../data/movieBrand";
@@ -39,10 +40,10 @@ export default function MoviePage() {
                 style={{ "--movie-card-delay": `${index * 70}ms` } as CSSProperties}
               >
                 <MovieMotionCard className="movie-design-service-card">
-                  <div className="movie-design-service-icon" aria-hidden="true">{service.icon}</div>
+                  <div className="movie-design-service-icon" aria-hidden="true"><MovieServiceIcon name={service.icon} /></div>
                   <div>
                     <h3>{service.title}</h3>
-                    <p>{service.description}</p>
+                    <p>{service.lines.map((line) => <span key={line}>{line}</span>)}</p>
                   </div>
                   <span className="movie-card-number" aria-hidden="true">0{index + 1}</span>
                 </MovieMotionCard>
@@ -66,7 +67,7 @@ export default function MoviePage() {
             <div className="movie-profile-body">
               <p>動画編集からディレクション、SNS運用まで。<br />「伝えること」を通して、人や企業の想いをカタチにするお手伝いをしています。</p>
               <p>動画制作・ディレクション歴4年。累計1,000本以上の制作に携わり、企業YouTube6チャンネル以上の運営に参画してきました。</p>
-              <p>SNS運用では、9か月でフォロワー1万人達成に貢献。婚活プロフィール写真の撮影では、男性クライアントのプロフィールへのリーチ率と問い合わせ数が増加した事例もあります。</p>
+              <p>SNS運用では、9か月でフォロワー1万人達成に貢献。撮影・クリエイティブ支援では、プロフィールへのリーチや問い合わせ増加につながった事例もあります。</p>
               <p>企画・編集・進行管理から外部パートナーとの連携まで、制作全体を見渡しながら支援します。</p>
               <p>視聴者の心に届くクリエイティブを、丁寧に、誠実に。<br />一緒に、素敵な作品をつくりましょう。</p>
             </div>
@@ -75,8 +76,11 @@ export default function MoviePage() {
 
         <MovieRevealSection id="contact" className="movie-design-contact">
           <div className="movie-contact-inner">
-            <div className="movie-design-heading"><span>CONTACT</span><h2>お問い合わせ</h2></div>
-            <p className="movie-contact-lead">制作のご相談・ご依頼はこちらから。<br />内容がまだまとまっていない段階でも、<br />お気軽にご相談ください。</p>
+            <div className="movie-design-heading"><span>CONTACT</span><h2>まずは、お気軽にご相談ください。</h2></div>
+            <p className="movie-contact-lead">
+              <span>動画制作・ディレクション・SNS運用など、<br />ご相談内容がまだ固まっていない段階でも大丈夫です。</span>
+              <span>目的や状況を伺いながら、<br />必要な制作内容を一緒に整理します。</span>
+            </p>
             <MovieContactForm />
           </div>
         </MovieRevealSection>

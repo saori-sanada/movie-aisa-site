@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { topContent } from "../data/top";
 
 type ActiveBrand = "movie" | "aisa" | null;
-type IntroMode = "pending" | "full" | "short";
+type IntroMode = "pending" | "full" | "short" | "complete";
 
 export function TopGateway() {
   const [active, setActive] = useState<ActiveBrand>(null);
@@ -22,19 +22,22 @@ export function TopGateway() {
     } catch {
       // Storage can be unavailable in privacy-restricted environments.
     }
-    const mode: Exclude<IntroMode, "pending"> = returning ? "short" : "full";
+    const mode: Exclude<IntroMode, "pending"> = returning ? "complete" : "full";
 
     setIntroMode(mode);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const interactionTimer = window.setTimeout(
-      () => {
-        setIsInteractive(true);
-        rootRef.current?.classList.add("is-interactive");
-        rootRef.current?.setAttribute("data-interactive", "true");
-        rootRef.current?.removeAttribute("inert");
-      },
-      reducedMotion ? 0 : mode === "full" ? 1300 : 300,
-    );
+    const enableInteraction = () => {
+      setIsInteractive(true);
+      rootRef.current?.classList.add("is-interactive");
+      rootRef.current?.setAttribute("data-interactive", "true");
+      rootRef.current?.removeAttribute("inert");
+    };
+    let interactionTimer: number | undefined;
+    if (reducedMotion || mode === "complete") {
+      enableInteraction();
+    } else {
+      interactionTimer = window.setTimeout(enableInteraction, 1300);
+    }
 
     const close = (event: PointerEvent) => {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) setActive(null);
@@ -57,7 +60,7 @@ export function TopGateway() {
     rootRef.current?.addEventListener("focusin", followFocus);
     document.addEventListener("pointerdown", close);
     return () => {
-      window.clearTimeout(interactionTimer);
+      if (interactionTimer !== undefined) window.clearTimeout(interactionTimer);
       rootRef.current?.removeAttribute("inert");
       rootRef.current?.removeAttribute("data-interactive");
       rootRef.current?.removeEventListener("pointermove", followPointer);
@@ -75,10 +78,10 @@ export function TopGateway() {
     <div className="top-art" aria-hidden="true">
       {(["movie", "aisa"] as const).map((brand) => (
         <picture key={brand} className={`top-picture top-picture-${brand}`}>
-          <source media="(max-width: 768px)" srcSet="top/home-mobile-9x16.webp" />
+          <source media="(max-width: 768px)" srcSet="/top/home-mobile-9x16.webp" />
           <img
             className="top-picture-image"
-            src="top/top-normal.webp"
+            src="/top/top-normal.webp"
             alt=""
             width="1672"
             height="941"

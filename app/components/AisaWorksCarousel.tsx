@@ -8,7 +8,7 @@ export function AisaWorksCarousel({ works }: { works: readonly AisaWork[] }) {
   return (
     <WorksAutoMarquee
       brand="aisa"
-      heading={<div className={pageStyles.heading}><span>WORKS</span><h2>制作実績</h2></div>}
+      heading={<div className={pageStyles.heading}><span>WORKS</span><h2>AI活用事例</h2></div>}
       items={works}
     />
   );

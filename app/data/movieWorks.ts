@@ -10,6 +10,8 @@ export type MovieWork = {
   detailEnabled: boolean;
   alt: string;
   backgroundColor: string;
+  productionType?: string;
+  scope?: readonly string[];
 };
 
 export const movieWorks = [
@@ -25,6 +27,21 @@ export const movieWorks = [
     detailEnabled: false,
     alt: "美容ブランドのクリエイティブイメージ",
     backgroundColor: "#ead8d3",
+  },
+  {
+    slug: "boost-edge",
+    category: "CM・広告動画",
+    title: "AIで描くスポーツドリンクCM「BOOST EDGE」",
+    thumbnail: "/works/movie/boost-edge.png",
+    previewVideo: null,
+    mediaType: "video",
+    aspectRatio: "16:9",
+    detailUrl: null,
+    detailEnabled: false,
+    alt: "スポーツドリンクCM BOOST EDGEのサムネイル",
+    backgroundColor: "#072b55",
+    productionType: "自主制作",
+    scope: ["企画", "構成", "AI画像生成", "AI映像生成", "動画編集", "演出"],
   },
   {
     slug: "business",
@@ -64,18 +81,5 @@ export const movieWorks = [
     detailEnabled: false,
     alt: "商品紹介クリエイティブを想定した正方形作品のイメージ",
     backgroundColor: "#e5d9d4",
-  },
-  {
-    slug: "ai",
-    category: "AIクリエイティブ",
-    title: "AIコンセプトムービー",
-    thumbnail: "/works/movie/sns-creative.png",
-    previewVideo: null,
-    mediaType: "video",
-    aspectRatio: "16:9",
-    detailUrl: null,
-    detailEnabled: false,
-    alt: "AIコンセプトムービーのイメージ",
-    backgroundColor: "#ded8e8",
   },
 ] satisfies MovieWork[];
