@@ -180,9 +180,9 @@
 .workCard h3{margin:16px 8px 8px;color:#493293;font-size:16px;font-weight:500;line-height:1.5}.workCard p{margin:0 8px;font-size:13px;line-height:1.72}.workCard p span{display:block}
 
 .profile{min-height:616px;padding:64px clamp(48px,6vw,104px);display:grid;grid-template-columns:minmax(360px,40%) minmax(0,60%);align-items:stretch;column-gap:clamp(64px,6vw,96px);background:radial-gradient(circle at 20% 45%,#b7a5ff2d,transparent 32%),linear-gradient(112deg,#faf9ff,#fff 52%,#f8f6ff);overflow:hidden}
-.profilePhoto{position:relative;width:100%;max-width:500px;min-height:600px;align-self:stretch;justify-self:end;overflow:hidden;border:1px solid #e7e2f8;border-radius:14px;background:#111;box-shadow:0 24px 55px #2a215b26}
-.profilePhoto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 82%,#fff);pointer-events:none}
-.profilePhoto img{object-fit:cover;object-position:50% 38%}
+.profilePhoto{position:relative;width:100%;max-width:500px;min-height:600px;align-self:stretch;justify-self:end;overflow:hidden;border:1px solid #e5e2ef;border-radius:14px;background:#eeedf3;box-shadow:0 24px 55px #2a215b21}
+.profilePhoto::after{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(180deg,#eeedf3 0,transparent 24px,transparent calc(100% - 24px),#eeedf3 100%),linear-gradient(90deg,#eeedf366 0,transparent 14px,transparent 90%,#faf9ffcc 100%);pointer-events:none}
+.profilePhoto img{z-index:1;object-fit:cover!important;object-position:50% 40%}
 .profileCopy{max-width:720px}.headingLeft{text-align:left}.profileCopy .headingLeft>span{font-size:18px}.profileCopy .headingLeft h2{margin-top:32px;font-size:clamp(42px,4vw,64px)}
 .profileCopy h3{margin:36px 0 28px;font-size:23px;font-weight:400;line-height:1.65;letter-spacing:.06em}.profileBody{max-width:680px}.profileBody p{margin:0 0 18px;font-size:14px;line-height:1.92;text-wrap:pretty}.profileBody p:last-child{margin-bottom:0}
 
@@ -240,7 +240,7 @@
   .serviceCard:hover,.serviceCard:focus-visible,.workCard:hover,.workCard:focus-visible{transform:none;box-shadow:0 10px 35px #5e49bd14}.serviceCard:active,.workCard:active{transform:translateY(-3px);box-shadow:0 16px 34px #5e49bd25}
   .workGrid{gap:22px}.workCard{padding:0 0 8px;background:#fff;box-shadow:0 10px 26px #28206412}.workCard h3,.workCard p{margin-right:18px;margin-left:18px}.workCard h3{font-size:18px}.workCard p{margin-bottom:14px;font-size:14px}
 
-  .profile{grid-template-columns:1fr;gap:0;min-height:0;padding:44px clamp(16px,5vw,24px) 50px}.profilePhoto{width:min(70vw,280px);min-height:0;aspect-ratio:1/1;align-self:auto;margin:0 auto;justify-self:center;border-radius:50%}.profilePhoto::after{display:none}.profileCopy{padding-top:32px}.headingLeft{text-align:center}.profileCopy .headingLeft>span{font-size:15px}.profileCopy .headingLeft h2{margin-top:20px;font-size:clamp(34px,9.5vw,46px)}.profileCopy h3{margin:28px 0 24px;font-size:21px;line-height:1.6;text-align:center}.profileBody p{margin-bottom:20px;font-size:16px;line-height:1.82}.profileBody p:last-child{margin-bottom:0}
+  .profile{grid-template-columns:1fr;gap:0;min-height:0;padding:44px clamp(16px,5vw,24px) 50px}.profilePhoto{width:min(82vw,320px);min-height:0;aspect-ratio:3/4;align-self:auto;margin:0 auto;justify-self:center;border-radius:12px}.profilePhoto::after{background:linear-gradient(180deg,#eeedf3 0,transparent 18px,transparent calc(100% - 18px),#eeedf3 100%),linear-gradient(90deg,#eeedf34d 0,transparent 12px,transparent calc(100% - 12px),#eeedf34d 100%)}.profilePhoto img{object-position:50% 38%}.profileCopy{padding-top:32px}.headingLeft{text-align:center}.profileCopy .headingLeft>span{font-size:15px}.profileCopy .headingLeft h2{margin-top:20px;font-size:clamp(34px,9.5vw,46px)}.profileCopy h3{margin:28px 0 24px;font-size:21px;line-height:1.6;text-align:center}.profileBody p{margin-bottom:20px;font-size:16px;line-height:1.82}.profileBody p:last-child{margin-bottom:0}
   .contact{min-height:0;padding:44px clamp(16px,5vw,24px) 50px}.contactInner{padding:28px 20px}.contactInner p{margin:22px auto 28px;font-size:15px}.contactInner .button{width:100%}
   .revealSection .heading,.revealSection .profilePhoto,.revealSection .profileCopy,.revealSection .contactInner,.cardReveal{transform:translateY(12px);transition-duration:.4s}
 }

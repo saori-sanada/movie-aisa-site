@@ -97,18 +97,24 @@ export function TopGateway() {
     <div className="top-intro-center-mask" aria-hidden="true" />
 
     <header className="top-identity"><span>{topContent.owner}</span><span>{topContent.role}</span></header>
-    <div className="top-owner" aria-label={`${topContent.owner}, ${topContent.role}`}>
-      <strong>SAORI SANADA</strong>
-      <span>Creative Producer</span>
+    <div className="top-center-position top-owner-position">
+      <div className="top-owner" aria-label={`${topContent.owner}, ${topContent.role}`}>
+        <strong>SAORI SANADA</strong>
+        <span>Creative Producer</span>
+      </div>
     </div>
 
     <Link className="top-hit top-hit-movie" href="/movie/" aria-label="まなだMOViEへ移動" onMouseEnter={() => activate("movie")} />
     <Link className="top-hit top-hit-aisa" href="/aisa/" aria-label="aisaへ移動" onMouseEnter={() => activate("aisa")} />
 
-    <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
-    <div className="top-choice-guide" aria-hidden="true">
-      <span className="top-choice-guide-desktop"><i>←</i> CHOOSE YOUR PATH <i>→</i></span>
-      <span className="top-choice-guide-mobile"><i>↑</i><b>CHOOSE YOUR PATH</b><i>↓</i></span>
+    <div className="top-center-position top-copy-position">
+      <div className="top-copy" aria-label={`${topContent.slogan} ${topContent.sloganJa}`}><h1><span>Unlock</span><span>Potential.</span></h1><p>{topContent.sloganJa}</p></div>
+    </div>
+    <div className="top-center-position top-choice-position">
+      <div className="top-choice-guide" aria-hidden="true">
+        <span className="top-choice-guide-desktop"><i>←</i> CHOOSE YOUR PATH <i>→</i></span>
+        <span className="top-choice-guide-mobile"><i>↑</i><b>CHOOSE YOUR PATH</b><i>↓</i></span>
+      </div>
     </div>
 
     <div className="top-brands">

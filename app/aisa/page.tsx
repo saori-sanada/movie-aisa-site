@@ -57,7 +57,7 @@ export default function AisaPage() {
 
         <AisaRevealSection id="profile" className={styles.profile}>
           <div className={styles.profilePhoto}>
-            <Image src={aisaProfile.image} alt={aisaProfile.imageAlt} fill sizes="(max-width: 768px) 70vw, 40vw" />
+            <Image src={aisaProfile.image} alt={aisaProfile.imageAlt} fill sizes="(max-width: 768px) 82vw, 40vw" />
           </div>
           <div className={styles.profileCopy}>
             <div className={`${styles.heading} ${styles.headingLeft}`}>

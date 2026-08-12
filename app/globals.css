@@ -1169,3 +1169,27 @@ img{height:auto}
   }
   .movie-design-hero-copy h1 span{white-space:nowrap}
 }
+
+/* HOME: horizontal centering belongs to stable outer wrappers; intro motion stays inside. */
+.top-center-position{position:absolute;left:50%;transform:translateX(-50%);pointer-events:none}
+.top-owner-position{z-index:3;top:22.5%;width:360px}
+.top-copy-position{z-index:3;top:53.5%;width:620px;max-width:620px;transform:translate(-50%,-50%)}
+.top-choice-position{z-index:12;bottom:8.5%}
+.top-center-position .top-owner,
+.top-center-position .top-copy,
+.top-center-position .top-choice-guide{position:relative;inset:auto;left:auto;right:auto;top:auto;bottom:auto;width:100%;transform:none}
+.top-center-position .top-owner{transform:translateY(18px)}
+.top-gateway.is-ready .top-center-position .top-owner{transform:translateY(0)}
+.top-gateway.is-intro-complete .top-center-position .top-owner,
+.top-gateway.is-intro-complete .top-center-position .top-choice-guide{transform:none}
+@keyframes homeOwnerRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes homeReturnOwner{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes homeReturnGuide{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){
+  .top-owner-position,.top-copy-position{display:none}
+  .top-choice-position{top:56.5%;bottom:auto;transform:translate(-50%,-50%)}
+  .top-gateway.is-intro-complete .top-center-position .top-choice-guide{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .top-center-position .top-owner,.top-center-position .top-copy,.top-center-position .top-choice-guide{transform:none!important}
+}
