@@ -44,7 +44,9 @@ export default function AisaPage() {
                 tabIndex={0}
               >
                 <span className={styles.serviceIcon} aria-hidden="true"><AisaServiceIcon name={service.icon} /></span>
-                <h3>{service.title}</h3>
+                <h3 aria-label={service.title}>
+                  {index === 4 ? <><span>AIエージェント</span><span>業務支援</span></> : service.title}
+                </h3>
                 <p>{service.lines.map((line) => <span key={line}>{line}</span>)}</p>
               </article>
             ))}
