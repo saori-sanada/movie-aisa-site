@@ -35,10 +35,11 @@ type WorksAutoMarqueeProps = {
 };
 
 const COPIES = [0, 1, 2] as const;
-const FIRST_AUTOPLAY_DELAY_MS = 1800;
+const FIRST_AUTOPLAY_DELAY_MS = 150;
 const AUTOPLAY_DELAY_MS = 2500;
 const SLIDE_DURATION_MS = 550;
 const SWIPE_CLICK_THRESHOLD_PX = 10;
+const AUTOPLAY_APPROACH_MARGIN = "0px 0px 40% 0px";
 
 const modulo = (value: number, length: number) => ((value % length) + length) % length;
 
@@ -237,7 +238,7 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
       const delay = hasStartedAutoplayRef.current ? AUTOPLAY_DELAY_MS : FIRST_AUTOPLAY_DELAY_MS;
       hasStartedAutoplayRef.current = true;
       scheduleAutoplayRef.current(delay);
-    }, { threshold: 0.2 });
+    }, { rootMargin: AUTOPLAY_APPROACH_MARGIN, threshold: 0.01 });
     visibilityObserver.observe(viewport);
     return () => {
       motion.removeEventListener("change", updateMotion);
