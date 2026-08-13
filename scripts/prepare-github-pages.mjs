@@ -20,10 +20,13 @@ async function collectFiles(directory) {
 
 function prefixPublicAssets(contents) {
   if (!basePath) return contents;
-  let updated = contents;
-  for (const prefix of publicAssetPrefixes) {
-    updated = updated.replaceAll(prefix, `${basePath}${prefix}`);
-  }
+  const publicAssetPattern = new RegExp(
+    `(?<![\\w-])(${publicAssetPrefixes
+      .map((prefix) => prefix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .join("|")})`,
+    "g",
+  );
+  let updated = contents.replace(publicAssetPattern, (prefix) => `${basePath}${prefix}`);
   for (const asset of publicAssetFiles) {
     updated = updated.replaceAll(asset, `${basePath}${asset}`);
   }
