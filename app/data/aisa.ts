@@ -48,6 +48,17 @@ export const aisaWorks = [
     visualLabel: "PROGRESS MANAGEMENT",
   },
   {
+    slug: "ai-ad-video-generation",
+    category: "AI活用 / クリエイティブ",
+    thumbnail: "/images/aisa/works/ai-ad-video-generation.png",
+    title: "AI広告動画生成",
+    description: "",
+    detailUrl: null,
+    detailEnabled: false,
+    alt: "AI広告動画生成のサムネイル",
+    visualLabel: "AI AD VIDEO GENERATION",
+  },
+  {
     slug: "homepage-production",
     category: "AI活用 / Web制作・発信",
     thumbnail: "/images/aisa/works/homepage-production.png",
