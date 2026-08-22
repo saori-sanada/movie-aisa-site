@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { movieBrand } from "../data/movieBrand";
+import { ContactForm } from "./ContactForm";
 
 export function MovieContactForm() {
   const [copied, setCopied] = useState(false);
@@ -15,6 +16,7 @@ export function MovieContactForm() {
 
   return (
     <div className="movie-contact-cta">
+      <ContactForm brand="movie" source="MOViE" subject="【MOViE】ポートフォリオサイトからのお問い合わせ" />
       <aside className="movie-contact-direct">
         <span>DIRECT EMAIL</span>
         <h3>メールで相談する</h3>

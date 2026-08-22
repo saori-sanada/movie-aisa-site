@@ -192,6 +192,11 @@
 .contactInner{width:min(760px,100%);margin:auto;padding:44px clamp(24px,5vw,54px);border:1px solid #e4def8;background:#fff;box-shadow:0 18px 55px #30255d14;text-align:center}
 .contactInner p{margin:24px auto 30px;color:#4d4962;font-size:15px;line-height:2;letter-spacing:.04em}
 .contactMessage{margin:24px auto 30px}.contactMessage p{margin:0 0 18px}.contactMessage p:last-child{margin-bottom:0}.contactMessage p span{display:block}
+.contactInner :global(.contact-form){margin:38px auto 0;text-align:left;box-shadow:0 18px 55px #30255d14}
+.contactInner :global(.contact-form-field){display:flex;flex-direction:column;gap:8px}.contactInner :global(.contact-form-field-wide){grid-column:1/-1}
+.contactInner :global(.contact-form-field label){font-size:13px;letter-spacing:.06em;color:#393652}.contactInner :global(.contact-form-field label span){margin-left:8px;color:#8267e7;font:10px/1 Arial,sans-serif}.contactInner :global(.contact-form-field label small){margin-left:8px;color:#77728e;font-size:10px}
+.contactInner :global(.contact-form-field input),.contactInner :global(.contact-form-field textarea){width:100%;border:0;border-bottom:1px solid #dcd6f1;background:#fbfaff;padding:12px 10px;color:#29264b;font:15px/1.7 inherit;outline:none;transition:border-color .25s,box-shadow .25s}.contactInner :global(.contact-form-field textarea){resize:vertical;min-height:140px}.contactInner :global(.contact-form-field input:focus),.contactInner :global(.contact-form-field textarea:focus){border-color:#8267e7;box-shadow:0 2px 0 #8267e7}
+.contactInner :global(.contact-form-actions){display:flex;align-items:center;gap:20px;grid-column:1/-1}.contactInner :global(.contact-form-actions button){flex:0 0 200px;min-height:48px;border:1px solid #8267e7;background:linear-gradient(100deg,#7b49d8,#4755d6);color:#fff;cursor:pointer;font:13px/1 inherit;letter-spacing:.08em}.contactInner :global(.contact-form-actions button:disabled){cursor:wait;opacity:.6}.contactInner :global(.contact-form-error){margin:0;color:#a14d68;font-size:13px;line-height:1.7}.contactInner :global(.contact-form-honeypot){position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.contactInner :global(.contact-form-success){margin:38px auto 0;padding:38px 20px;border:1px solid #dcd6f1;background:#fbfaff;color:#393652;text-align:center}.contactInner :global(.contact-form-success strong){font-size:18px;font-weight:400}.contactInner :global(.contact-form-success p){margin:12px 0 0;font-size:14px}
 
 .revealSection{opacity:1;transform:none}
 .revealSection .heading,.revealSection .profilePhoto,.revealSection .profileCopy,.revealSection .contactInner{opacity:0;transform:translateY(22px);transition:opacity .48s cubic-bezier(.22,1,.36,1),transform .48s cubic-bezier(.22,1,.36,1)}
@@ -253,4 +258,11 @@
 
 @media(prefers-reduced-motion:reduce){
   .header nav,.heroBrand,.heroScene,.heroCopy h1,.heroCopy p,.heroCopy .button,.revealSection .heading,.revealSection .profilePhoto,.revealSection .profileCopy,.revealSection .contactInner,.cardReveal{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
+}
+
+@media(max-width:768px){
+  .contactInner :global(.contact-form){grid-template-columns:1fr;margin-top:30px;padding:28px 20px;gap:20px}
+  .contactInner :global(.contact-form-actions){display:block}
+  .contactInner :global(.contact-form-actions button){width:100%}
+  .contactInner :global(.contact-form-error){margin-top:14px}
 }

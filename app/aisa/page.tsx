@@ -4,6 +4,7 @@ import { AisaHeader } from "../components/AisaHeader";
 import { AisaRevealSection } from "../components/AisaRevealSection";
 import { AisaServiceIcon } from "../components/AisaServiceIcon";
 import { AisaWorksCarousel } from "../components/AisaWorksCarousel";
+import { ContactForm } from "../components/ContactForm";
 import { aisaContact, aisaProfile, aisaServices, aisaWorks } from "../data/aisa";
 import styles from "./AisaPage.module.css";
 
@@ -80,9 +81,7 @@ export default function AisaPage() {
                 <p key={paragraph[0]}>{paragraph.map((line) => <span key={line}>{line}</span>)}</p>
               ))}
             </div>
-            <span className={`${styles.button} ${styles.buttonOutline} ${styles.pending}`} aria-disabled="true">
-              お問い合わせ <span aria-hidden="true">→</span>
-            </span>
+            <ContactForm brand="aisa" source="aisa" subject="【aisa】ポートフォリオサイトからのお問い合わせ" />
           </div>
         </AisaRevealSection>
       </main>
