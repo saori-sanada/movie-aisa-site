@@ -189,6 +189,26 @@
   color: #755bd1;
 }
 
+.comingSoon {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #17145b99;
+  font: 500 12px/1 Arial, sans-serif;
+  letter-spacing: .18em;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+
+.aisa .itemStatic:hover .comingSoon,
+.aisa .itemStatic:focus-visible .comingSoon {
+  opacity: 1;
+}
+
 .placeholder {
   position: absolute;
   inset: 0;

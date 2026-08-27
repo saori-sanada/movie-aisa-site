@@ -346,6 +346,7 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
     const content = (
       <span className={styles.media} style={{ "--work-background": item.backgroundColor } as MarqueeStyle}>
         {media}
+        {brand === "aisa" ? <span className={styles.comingSoon} aria-hidden="true">COMING SOON</span> : null}
         {item.detailEnabled && item.detailUrl ? <span className={styles.detailCue} aria-hidden="true">詳しく見る <span>→</span></span> : null}
       </span>
     );
