@@ -16,7 +16,7 @@ export function MovieWorkDetailPage({ work }: { work: MovieWorkDetail }) {
           </figure>
           <aside className="movie-work-detail-info">
             <p className="movie-work-detail-category">{work.category} <span aria-hidden="true">｜</span> 自主制作</p>
-            <h1>{work.slug === "digital-marketing" ? <>デジタル<br />マーケティング講座</> : work.title}</h1>
+            <h1>{work.slug === "digital-marketing" ? <>デジタル<br />マーケティング講座</> : work.slug === "kikonai-misogi" ? <>木古内寒中<br className="movie-kikonai-mobile-break" />みそぎまつり</> : work.title}</h1>
             <p className="movie-work-detail-subtitle">{work.slug === "boost-edge" ? <>AI×映像編集で制作した<br className="movie-work-detail-desktop-break" />スポーツドリンクCM</> : work.subtitle}</p>
             <section><p className="movie-work-detail-label">ABOUT</p><p className="movie-work-detail-summary">{work.slug === "boost-edge" ? <>AIを活用し、企画・映像生成から編集・演出まで<br className="movie-work-detail-desktop-break" />一貫して制作した自主制作CM。</> : work.slug === "manada-movie" ? <>まなだMOViEのサービスや想いを伝える紹介ムービー。<br />企画・構成・制作プロデュース・ナレーションを担当し、<br />外部クリエイターと連携して制作しました。<br />案件に応じて、クリエイターと連携した制作にも対応しています。</> : work.summary}</p></section>
             <section><p className="movie-work-detail-label">ROLE</p><p className="movie-work-detail-role">{work.roleText}</p>{work.productionNote ? <small className="movie-work-detail-production-note">{work.productionNote}</small> : null}</section>

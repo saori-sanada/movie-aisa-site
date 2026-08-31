@@ -68,7 +68,7 @@ export default function AisaPage() {
             </div>
             <h3>{aisaProfile.lead}</h3>
             <div className={styles.profileBody}>
-              {aisaProfile.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              {aisaProfile.body.map((paragraph) => { const parts = paragraph.split(/(外部パートナーとの調整|仕組みをつくれないか)/g); return <p key={paragraph}>{parts.map((part, index) => /^(外部パートナーとの調整|仕組みをつくれないか)$/.test(part) ? <span className={styles.profileKeep} key={`${part}-${index}`}>{part}</span> : part)}</p>; })}
             </div>
           </div>
         </AisaRevealSection>
