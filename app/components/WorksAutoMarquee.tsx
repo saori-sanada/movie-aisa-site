@@ -33,6 +33,7 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
   const lastTimeRef = useRef<number | null>(null);
   const rafIdRef = useRef<number | null>(null);
   const manualResumeTimerRef = useRef<number | null>(null);
+  const touchResumeTimerRef = useRef<number | null>(null);
 
   const moveBy = (direction: -1 | 1) => {
     const viewport = viewportRef.current;
@@ -83,22 +84,38 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
     return () => {
       if (rafIdRef.current !== null) cancelAnimationFrame(rafIdRef.current);
       if (manualResumeTimerRef.current !== null) window.clearTimeout(manualResumeTimerRef.current);
+      if (touchResumeTimerRef.current !== null) window.clearTimeout(touchResumeTimerRef.current);
     };
   }, [items.length]);
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse") {
       pausedRef.current = true;
-      event.currentTarget.setPointerCapture?.(event.pointerId);
     }
   };
 
   const handlePointerEnd = (event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse") {
+      scheduleTouchResume();
+    }
+  };
+
+  const scheduleTouchResume = () => {
+    if (touchResumeTimerRef.current !== null) window.clearTimeout(touchResumeTimerRef.current);
+    touchResumeTimerRef.current = window.setTimeout(() => {
       const viewport = viewportRef.current;
       if (viewport) positionRef.current = viewport.scrollLeft;
       lastTimeRef.current = null;
       pausedRef.current = false;
+      touchResumeTimerRef.current = null;
+    }, 500);
+  };
+
+  const handleScroll = () => {
+    if (pausedRef.current) {
+      const viewport = viewportRef.current;
+      if (viewport) positionRef.current = viewport.scrollLeft;
+      scheduleTouchResume();
     }
   };
 
@@ -128,7 +145,7 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
         <button type="button" className={styles.arrow} onClick={() => moveBy(-1)} aria-label="前の作品を見る">←</button>
         <button type="button" className={styles.arrow} onClick={() => moveBy(1)} aria-label="次の作品を見る">→</button>
       </div>
-      <div ref={viewportRef} className={styles.viewport} role="region" aria-label={`制作実績カルーセル。全${items.length}作品`} tabIndex={0} onPointerDown={handlePointerDown} onPointerUp={handlePointerEnd} onPointerCancel={handlePointerEnd}>
+      <div ref={viewportRef} className={styles.viewport} role="region" aria-label={`制作実績カルーセル。全${items.length}作品`} tabIndex={0} onScroll={handleScroll} onPointerDown={handlePointerDown} onPointerUp={handlePointerEnd} onPointerCancel={handlePointerEnd}>
         <div className={styles.track}>
           <div ref={firstGroupRef} className={styles.group}>{items.map((item, index) => renderItem(item, 0, index))}</div>
           <div className={styles.group} aria-hidden="true">{items.map((item, index) => renderItem(item, 1, index))}</div>
