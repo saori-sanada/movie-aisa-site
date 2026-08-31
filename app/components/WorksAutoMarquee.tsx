@@ -39,7 +39,7 @@ export function WorksAutoMarquee({ items, brand, heading }: WorksAutoMarqueeProp
     const firstGroup = firstGroupRef.current;
     const firstSlide = firstGroup?.querySelector<HTMLElement>("[data-work-slide]");
     const secondSlide = firstGroup?.querySelector<HTMLElement>("[data-work-slide]:nth-child(2)");
-    if (!viewport || !firstSlide) return;
+    if (!viewport || !firstGroup || !firstSlide) return;
     const step = secondSlide
       ? secondSlide.offsetLeft - firstSlide.offsetLeft
       : firstSlide.offsetWidth;
