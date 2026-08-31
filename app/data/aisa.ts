@@ -37,6 +37,17 @@ export const aisaServices = [
 
 export const aisaWorks = [
   {
+    slug: "ai-promotion-video-generation",
+    category: "AI活用 / クリエイティブ",
+    thumbnail: "/images/aisa/works/ai-promotion-video-generation.png",
+    title: "AIプロモーション動画生成",
+    description: "AIを活用し、ストーリー性のある動画を制作",
+    detailUrl: null,
+    detailEnabled: false,
+    alt: "AIプロモーション動画生成のサムネイル",
+    visualLabel: "AI PROMOTION VIDEO GENERATION",
+  },
+  {
     slug: "progress-management",
     category: "AI活用 / 業務改善",
     thumbnail: "/images/aisa/works/progress-management.png",

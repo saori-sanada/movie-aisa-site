@@ -61,7 +61,7 @@ export function ContactForm({ brand, source, subject }: ContactFormProps) {
       <div className="contact-form-field"><label htmlFor={`${brand}-company`}>会社名・屋号 <small>任意</small></label><input id={`${brand}-company`} name="company" type="text" placeholder="株式会社〇〇" autoComplete="organization" /></div>
       <div className="contact-form-field contact-form-field-wide"><label htmlFor={`${brand}-email`}>メールアドレス <span aria-hidden="true">必須</span></label><input id={`${brand}-email`} name="email" type="email" placeholder="example@example.com" required autoComplete="email" /></div>
       <div className="contact-form-field contact-form-field-wide"><label htmlFor={`${brand}-message`}>お問い合わせ内容 <span aria-hidden="true">必須</span></label><textarea id={`${brand}-message`} name="message" placeholder="ご相談内容をご記入ください" required rows={6} /></div>
-      <div className="contact-form-actions"><button type="submit" disabled={status === "sending"}>{status === "sending" ? "送信中..." : "送信する"}</button>{status === "error" && <p className="contact-form-error" role="alert" aria-live="polite">送信できませんでした。時間をおいてもう一度お試しください。</p>}</div>
+      <div className="contact-form-actions" style={brand === "movie" ? { justifyContent: "center" } : undefined}><button type="submit" disabled={status === "sending"}>{status === "sending" ? "送信中..." : "送信する"}</button>{status === "error" && <p className="contact-form-error" role="alert" aria-live="polite">送信できませんでした。時間をおいてもう一度お試しください。</p>}</div>
     </form>
   );
 }
