@@ -66,7 +66,9 @@ export default function AisaPage() {
             <div className={`${styles.heading} ${styles.headingLeft}`}>
               <span>PROFILE</span><h2>{aisaProfile.name}</h2><small>{aisaProfile.nameEn}</small><em>{aisaProfile.role}</em>
             </div>
-            <h3>{aisaProfile.lead}</h3>
+            <h3 className={styles.profileLead}>
+              <span>AIを、仕事の</span><span>心強いパートナーに。</span>
+            </h3>
             <div className={styles.profileBody}>
               {aisaProfile.body.map((paragraph) => { const parts = paragraph.split(/(外部パートナーとの調整|仕組みをつくれないか)/g); return <p key={paragraph}>{parts.map((part, index) => /^(外部パートナーとの調整|仕組みをつくれないか)$/.test(part) ? <span className={styles.profileKeep} key={`${part}-${index}`}>{part}</span> : part)}</p>; })}
             </div>
