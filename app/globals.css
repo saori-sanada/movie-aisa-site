@@ -593,7 +593,7 @@ img{height:auto}
 .movie-design-about-copy h3{margin:36px 0 24px}
 .movie-profile-body{max-width:680px}
 .movie-design-about-copy .movie-profile-body p{margin:0 0 18px;line-height:1.92;text-wrap:pretty}
-.movie-design-about-copy .movie-profile-body p:last-child{margin-bottom:0}.movie-kikonai-mobile-break{display:none}.movie-profile-keep{white-space:nowrap}
+.movie-design-about-copy .movie-profile-body p:last-child{margin-bottom:0}.movie-kikonai-mobile-break{display:none}.movie-profile-mobile-break{display:none}.movie-profile-keep{white-space:nowrap}
 .movie-contact-direct{padding-block:36px}
 .movie-contact-coming-soon{margin:18px 0 0!important;color:#765952;font-size:15px!important}
 
@@ -911,7 +911,7 @@ img{height:auto}
   .movie-design-about-copy .movie-design-heading-left small{margin-top:11px}
   .movie-design-about-copy h3{max-width:350px;margin:23px auto 15px;font-size:clamp(20px,5.5vw,23px);line-height:1.55;letter-spacing:.035em;text-wrap:balance}
   .movie-design-about-copy p{font-size:16px;line-height:1.78;letter-spacing:.01em}
-  .movie-kikonai-mobile-break{display:block}.movie-design-about-copy .movie-profile-body p{font-size:15px;line-height:1.9;letter-spacing:.015em;overflow-wrap:normal;word-break:normal;line-break:strict}
+  .movie-kikonai-mobile-break{display:block}.movie-profile-mobile-break{display:block}.movie-design-about-copy .movie-profile-body p{font-size:15px;line-height:1.9;letter-spacing:.015em;overflow-wrap:normal;word-break:normal;line-break:strict}
 
   .movie-design-contact{padding:44px clamp(18px,5vw,24px) 50px}
   .movie-design-contact .movie-contact-lead{margin:24px auto 38px;font-size:16px;line-height:1.75}
