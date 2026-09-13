@@ -266,3 +266,4 @@
   .contactInner :global(.contact-form-actions button){width:100%}
   .contactInner :global(.contact-form-error){margin-top:14px}
 }
+.contactInner :global(.contact-form-actions){justify-content:center}

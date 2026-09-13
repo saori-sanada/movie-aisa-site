@@ -15,9 +15,9 @@ export function AisaWorkDetailPage({ work }: { work: AisaWorkDetail }) {
         </div>
         <article className={styles.info}>
           <p className={styles.category}>{work.category}</p>
-          <h1>{work.slug === "supervision-mail" ? <>監修メール<br />システム</> : work.title}</h1>
+          <h1 className={work.slug === "ai-promotion-video" ? styles.aiPromotionTitle : undefined}>{work.slug === "supervision-mail" ? <>監修メール<br />システム</> : work.slug === "ai-promotion-video" ? <><span>AIプロモーション</span><span>動画生成</span></> : work.title}</h1>
           <p className={styles.subtitle}>{work.subtitle}</p>
-          <section><h2>ABOUT</h2><p>{work.summary}</p></section>
+          <section className={work.slug === "ai-promotion-video" ? styles.aiPromotionAbout : undefined}><h2>ABOUT</h2><p>{work.slug === "ai-promotion-video" ? <>企画・構成からAIによる映像生成、編集・演出まで一貫して制作。<br className={styles.desktopBreak} />撮影を行わず、ストーリー性のあるプロモーション映像を制作しました。</> : work.summary}</p></section>
           <section><h2>ROLE</h2><p>{work.role}</p></section>
           {work.flow ? <section><h2>FLOW</h2>{work.flowLead ? <p className={styles.flowLead}>{work.flowLead}</p> : null}{work.flowNote ? <p className={styles.flowNote}>{work.flowNote}</p> : null}<ol className={styles.flow}>{work.flow.map((step) => <li key={step}>{step}</li>)}</ol></section> : null}
           {work.tools?.length ? <section><h2>TOOLS</h2><div className={styles.tools}>{work.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></section> : null}
