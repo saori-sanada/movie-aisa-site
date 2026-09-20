@@ -83,7 +83,11 @@ export default function AisaPage() {
                 <p key={paragraph[0]}>{paragraph.map((line) => <span key={line}>{line}</span>)}</p>
               ))}
             </div>
-            <ContactForm brand="aisa" source="aisa" subject="【aisa】ポートフォリオサイトからのお問い合わせ" />
+            <div className={styles.contactMethods} aria-label="お問い合わせ方法">
+              <a className={styles.contactMethod} href="#aisa-contact-form">フォームで相談する <span aria-hidden="true">↓</span></a>
+              <a className={`${styles.contactMethod} ${styles.contactMethodLine}`} href="https://lin.ee/Z7CqiDN" target="_blank" rel="noreferrer">LINEで相談する <span aria-hidden="true">↗</span></a>
+            </div>
+            <div id="aisa-contact-form"><ContactForm brand="aisa" source="aisa" subject="【aisa】ポートフォリオサイトからのお問い合わせ" /></div>
           </div>
         </AisaRevealSection>
       </main>

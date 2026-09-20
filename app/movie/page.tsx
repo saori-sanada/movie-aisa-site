@@ -81,6 +81,10 @@ export default function MoviePage() {
               <span>動画制作・ディレクション・SNS運用など、<br />ご相談内容がまだ固まっていない段階でも大丈夫です。</span>
               <span>目的や状況を伺いながら、<br />必要な制作内容を一緒に整理します。</span>
             </p>
+            <div className="movie-contact-methods" aria-label="お問い合わせ方法">
+              <a className="movie-contact-method movie-contact-method-email" href="#movie-contact-form">フォームで相談する <span aria-hidden="true">↓</span></a>
+              <a className="movie-contact-method movie-contact-method-line" href="https://lin.ee/Z7CqiDN" target="_blank" rel="noreferrer">LINEで相談する <span aria-hidden="true">↗</span></a>
+            </div>
             <MovieContactForm />
           </div>
         </MovieRevealSection>
