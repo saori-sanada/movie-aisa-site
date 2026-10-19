@@ -23,7 +23,7 @@ export const aisaWorkDetails = {
     subtitle: "確認・修正連絡を、ひとつの流れに。",
     about: "監修依頼から確認・修正内容の共有、送信までの流れをGASで自動化。連絡漏れや確認漏れを防ぎ、監修業務を効率化しました。",
     role: "業務整理 / 要件設計 / GAS実装 / フロー設計 / 検証・改善",
-    media: "/images/aisa/works/supervision-mail/監修メール送信システム.mp4",
+    media: "/images/aisa/works/supervision-mail/修正_監修メールシステム.mp4",
     mediaType: "video",
     poster: "/images/aisa/works/supervision-mail.png",
     tools: [
