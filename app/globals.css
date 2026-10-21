@@ -1122,27 +1122,29 @@ img{height:auto}
   .top-gateway .mobile-home-brand--movie{top:calc(7.7% - 8px)}
 }
 
-/* Keep the PC central copy independent from the MOViE image framing. */
-@media(min-width:769px){
-  .top-gateway[data-interactive="true"] .top-intro-center-mask{
-    display:block!important;
-    inset:34% 28% 22%;
-    z-index:2;
-    background:radial-gradient(ellipse at center,#03030df2 0%,#03030ddf 64%,#03030d00 100%);
-    opacity:1!important;
-    animation:none!important;
-  }
-  .top-gateway[data-interactive="true"] .top-copy{opacity:1!important}
-  .top-gateway[data-interactive="true"] .top-copy-position{top:53.5%}
-}
-
-/* HOME selection geometry and direct crossfade between both worlds. */
+/* HOME PC FV restore: keep the baked-in center copy and full-width framing. */
 @media(min-width:769px){
   .top-gateway{--top-center-half-gap:clamp(55px,6vw,90px)}
-  .top-gateway .top-intro-center-mask{display:none}
+  .top-gateway .top-intro-center-mask{
+    display:none!important;
+    opacity:0!important;
+    background:transparent!important;
+    animation:none!important;
+  }
+  .top-gateway .top-copy{
+    display:none!important;
+    opacity:0!important;
+    animation:none!important;
+  }
+  .top-gateway .top-picture-movie .top-picture-image,
+  .top-gateway .top-picture-aisa .top-picture-image{object-position:center}
+  .top-gateway.is-intro-full .top-picture-movie{animation-name:homeWorldMovieInNoShift}
+  .top-gateway.is-intro-full .top-picture-aisa{animation-name:homeWorldAisaInNoShift}
   .top-gateway .top-hit-movie{left:0;right:calc(50% + var(--top-center-half-gap));width:auto}
   .top-gateway .top-hit-aisa{right:0;left:calc(50% + var(--top-center-half-gap));width:auto}
 }
+@keyframes homeWorldMovieInNoShift{from{opacity:0;filter:brightness(.42)}to{opacity:1;filter:brightness(1)}}
+@keyframes homeWorldAisaInNoShift{from{opacity:0;filter:brightness(.42)}to{opacity:1;filter:brightness(1)}}
 .top-gateway .top-picture{pointer-events:none;transition:filter .36s cubic-bezier(.22,1,.36,1),opacity .32s ease-out,transform .36s cubic-bezier(.22,1,.36,1)}
 .top-gateway .top-art-shade{opacity:0;background:#020108;transition:opacity .32s ease-out}
 .top-gateway .top-picture-image{transition:filter .36s cubic-bezier(.22,1,.36,1)}
