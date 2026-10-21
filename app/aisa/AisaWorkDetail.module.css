@@ -13,6 +13,7 @@
 @media(max-width:800px){.aiPromotionTitle{font-size:clamp(30px,9vw,42px)!important}.aiPromotionAbout p{font-size:14px}}
 @media(max-width:900px){.videoAutoEditMediaColumn{gap:26px}}
 @media(max-width:900px){.videoAutoEditFullVideo :global(.movie-work-detail-video-wrap){width:100%}}
+@media(max-width:800px){.videoAutoEditMediaColumn> :global(.movie-work-detail-video-wrap){order:1}.videoAutoEditFullVideo{order:2}}
 
 .aisaPromotionPage:global(.movie-work-detail-page){background:linear-gradient(135deg,#fbfaff 0%,#fff 54%,#f3efff 100%);color:#2d2155}
 .aisaPromotionPage:global(.movie-work-detail-page) :global(.movie-work-detail-back-link){color:#6550bd}
