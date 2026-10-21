@@ -10,7 +10,7 @@ export function AisaWorkDetailPage({ work }: { work: AisaWorkDetail }) {
     ? "movie-work-detail-video-wrap movie-work-detail-image-wrap movie-work-detail-media-16-9"
     : "movie-work-detail-video-wrap movie-work-detail-media-16-9";
 
-  const usesAisaLavenderTheme = work.slug === "ai-promotion-video" || work.slug === "supervision-mail" || work.slug === "video-auto-edit";
+  const usesAisaLavenderTheme = work.slug === "ai-promotion-video" || work.slug === "supervision-mail" || work.slug === "video-auto-edit" || work.slug === "ai-site-production";
   const titleLines = work.titleLines ?? [work.title];
 
   return <div className={`${usesAisaLavenderTheme ? styles.aisaPromotionPage : ""} movie-work-detail-page`}>
