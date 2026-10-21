@@ -94,7 +94,7 @@
   background:linear-gradient(120deg,#02061b 0%,#07103a 54%,#111061 80%,#03071d 100%);
   animation:sceneIn 1.05s .08s cubic-bezier(.22,1,.36,1) forwards;
 }
-.heroIllustration{position:absolute;inset:0;background:url("/images/05_AISA_Page.png") center top/auto 2580px no-repeat;clip-path:inset(0 0 0 35%);filter:saturate(1.04) contrast(1.02)}
+.heroIllustration{position:absolute;inset:0;background:url("/images/05_AISA_Page.png") center top/auto 2580px no-repeat;clip-path:inset(0 0 0 45%);filter:saturate(1.04) contrast(1.02)}
 .heroIllustration::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#03071d 0 78px,#03071dbd 102px,transparent 142px),linear-gradient(90deg,#03071d 0%,transparent 24%);pointer-events:none}
 .cityLights{
   position:absolute;
