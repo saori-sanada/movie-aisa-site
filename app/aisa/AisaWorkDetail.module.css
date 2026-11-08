@@ -9,11 +9,21 @@
 .videoAutoEditFullVideo :global(.movie-work-detail-video-wrap) video{background:#fbfaff}
 .aiPromotionTitle{font-size:clamp(32px,3.5vw,50px)!important;line-height:1.1}
 .aiPromotionTitle span{display:block;white-space:nowrap}
+.videoPlaceholder{position:relative;display:grid;place-items:center;aspect-ratio:16 / 9;overflow:hidden;background:#17145b}
+.videoPlaceholderPoster{object-fit:cover;opacity:.42;filter:saturate(.8)}
+.videoPlaceholderOverlay{position:relative;z-index:1;display:grid;justify-items:center;gap:10px;padding:18px 22px;color:#fff;text-align:center;background:#17145bcc;box-shadow:0 12px 30px #17145b40}
+.videoPlaceholderOverlay span{font:500 10px/1 Arial,sans-serif;letter-spacing:.18em}
+.videoPlaceholderOverlay strong{font-size:15px;font-weight:400;letter-spacing:.08em}
+.featureList{display:grid;gap:0;margin:0;padding:0;list-style:none;color:#40375e;font-size:13px;line-height:1.75}
+.featureList li{padding:6px 0;border-bottom:1px solid #ded7f2}
+.featureList li:first-child{border-top:1px solid #ded7f2}
+.featureList li::before{content:"—";margin-right:9px;color:#8061e9}
 @media(max-width:800px){.desktopBreak{display:none}}
 @media(max-width:800px){.aiPromotionTitle{font-size:clamp(30px,9vw,42px)!important}.aiPromotionAbout p{font-size:14px}}
 @media(max-width:900px){.videoAutoEditMediaColumn{gap:26px}}
 @media(max-width:900px){.videoAutoEditFullVideo :global(.movie-work-detail-video-wrap){width:100%}}
 @media(max-width:800px){.videoAutoEditMediaColumn> :global(.movie-work-detail-video-wrap){order:1}.videoAutoEditFullVideo{order:2}}
+@media(max-width:520px){.videoPlaceholderOverlay{padding:14px 16px}.videoPlaceholderOverlay strong{font-size:13px}.featureList{font-size:13px}}
 
 .aisaPromotionPage:global(.movie-work-detail-page){background:linear-gradient(135deg,#fbfaff 0%,#fff 54%,#f3efff 100%);color:#2d2155}
 .aisaPromotionPage:global(.movie-work-detail-page) :global(.movie-work-detail-back-link){color:#6550bd}

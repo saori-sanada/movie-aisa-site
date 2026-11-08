@@ -5,8 +5,9 @@ export type AisaWorkDetail = {
   titleLines?: readonly string[];
   subtitle: string;
   about: string;
+  features?: readonly string[];
   role: string;
-  media: string;
+  media: string | null;
   mediaType: "image" | "video";
   poster?: string;
   fullMedia?: string;
@@ -30,6 +31,30 @@ export const aisaWorkDetails = {
       { name: "Google Apps Script", detail: "メール送信・自動化" },
       { name: "Gmail", detail: "監修依頼・確認連絡" },
       { name: "Google スプレッドシート", detail: "データ管理・進行管理" },
+    ],
+  },
+  "interview-booking": {
+    slug: "interview-booking",
+    category: "AI活用 / Webアプリ開発・業務改善",
+    title: "面談予約システム",
+    titleLines: ["面談予約", "システム"],
+    subtitle: "予約受付からスケジュール管理まで、ひとつの仕組みに。",
+    about: "空き時間の確認から面談予約、Googleカレンダーへの反映、予約完了メールの送信までを一元化。予約者・管理者双方がスムーズに利用できるWebシステムを開発しました。",
+    features: [
+      "カレンダーの空き時間表示",
+      "Webからの面談予約",
+      "Googleカレンダーとの連携",
+      "予約完了メール・管理者への通知",
+      "予約者・管理者からのキャンセル操作",
+    ],
+    role: "要件設計 / UI設計 / AI支援開発 / 動作検証・改善",
+    media: "/images/aisa/works/interview-booking/FIX_面談予約システム_紹介動画_v06.mp4",
+    mediaType: "video",
+    poster: "/images/aisa/works/interview-booking.png",
+    tools: [
+      { name: "Google カレンダー", detail: "空き時間確認・予約情報の自動反映" },
+      { name: "Gmail", detail: "予約確認・管理者通知・キャンセル通知" },
+      { name: "Google Meet", detail: "面談用リンクの自動発行" },
     ],
   },
   "ai-site-production": {
