@@ -5,6 +5,7 @@ export type AisaWorkDetail = {
   titleLines?: readonly string[];
   subtitle: string;
   about: string;
+  aboutParagraphs?: readonly string[];
   features?: readonly string[];
   role: string;
   media: string | null;
@@ -47,14 +48,43 @@ export const aisaWorkDetails = {
       "予約完了メール・管理者への通知",
       "予約者・管理者からのキャンセル操作",
     ],
-    role: "要件設計 / UI設計 / AI支援開発 / 動作検証・改善",
+    role: "要件設計 / UI設計 / AI支援開発・実装 / 動作検証・改善",
     media: "/images/aisa/works/interview-booking/FIX_面談予約システム_紹介動画_v06.mp4",
     mediaType: "video",
     poster: "/images/aisa/works/interview-booking.png",
     tools: [
-      { name: "Google カレンダー", detail: "空き時間確認・予約情報の自動反映" },
-      { name: "Gmail", detail: "予約確認・管理者通知・キャンセル通知" },
-      { name: "Google Meet", detail: "面談用リンクの自動発行" },
+      { name: "Claude Code", detail: "AI支援によるシステム開発・実装" },
+      { name: "Vercel", detail: "Webアプリの公開・運用" },
+      { name: "Supabase", detail: "データベース・予約情報管理" },
+      { name: "Google Calendar API", detail: "予約・カレンダー連携" },
+      { name: "Gmailなどのメール連携", detail: "予約確認・管理者通知" },
+    ],
+  },
+  "survey-aggregation": {
+    slug: "survey-aggregation",
+    category: "AI活用 / 業務改善（GAS）",
+    title: "アンケート自動集計システム",
+    titleLines: ["アンケート自動集計", "システム"],
+    subtitle: "順位集計から感想整理まで、約5秒で。",
+    about: "アンケートの1位〜3位を自動で得点化し、合計得点によるランキングと候補ごとに寄せられた感想を整理するシステムを開発しました。",
+    aboutParagraphs: [
+      "アンケートの1位〜3位を自動で得点化し、合計得点によるランキングと候補ごとに寄せられた感想を整理するシステムを開発しました。",
+      "Google Apps Scriptを活用し、手作業で行っていた得点計算・順位付け・コメント整理を自動化。実際の業務で使用し、集計作業の効率化を実現しました。",
+    ],
+    features: [
+      "アンケート回答データの読み込み",
+      "1位・2位・3位の自動得点化（3点・2点・1点）",
+      "合計得点によるランキング作成",
+      "候補ごとの感想・コメント抽出",
+      "集計結果のスプレッドシート出力",
+    ],
+    role: "業務課題整理 / 集計仕様設計 / GAS実装 / 動作検証・改善",
+    media: "/images/aisa/works/survey-aggregation/survey-aggregation.mp4",
+    mediaType: "video",
+    poster: "/images/aisa/works/survey-aggregation/survey-aggregation.png",
+    tools: [
+      { name: "Google Apps Script", detail: "集計処理・自動化" },
+      { name: "Google スプレッドシート", detail: "回答・集計結果管理" },
     ],
   },
   "ai-site-production": {

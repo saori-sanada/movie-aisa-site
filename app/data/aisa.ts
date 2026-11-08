@@ -48,6 +48,17 @@ export const aisaWorks = [
     visualLabel: "VIDEO AUTO EDIT",
   },
   {
+    slug: "survey-aggregation",
+    category: "AI活用 / 業務改善（GAS）",
+    thumbnail: "/images/aisa/works/survey-aggregation.png",
+    title: "アンケート自動集計システム",
+    description: "",
+    detailUrl: "/aisa/works/survey-aggregation",
+    detailEnabled: true,
+    alt: "アンケート自動集計システムのサムネイル",
+    visualLabel: "SURVEY AGGREGATION",
+  },
+  {
     slug: "interview-booking",
     category: "AI活用 / Webアプリ開発・業務改善",
     thumbnail: "/images/aisa/works/interview-booking.png",

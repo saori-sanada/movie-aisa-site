@@ -26,6 +26,8 @@
 @media(max-width:520px){.videoPlaceholderOverlay{padding:14px 16px}.videoPlaceholderOverlay strong{font-size:13px}.featureList{font-size:13px}}
 
 .aisaPromotionPage:global(.movie-work-detail-page){background:linear-gradient(135deg,#fbfaff 0%,#fff 54%,#f3efff 100%);color:#2d2155}
+.interviewBookingPage:global(.movie-work-detail-page) :global(.movie-work-detail-grid){align-items:start}
+.aboutParagraph + .aboutParagraph{margin-top:10px!important}
 .aisaPromotionPage:global(.movie-work-detail-page) :global(.movie-work-detail-back-link){color:#6550bd}
 .aisaPromotionPage:global(.movie-work-detail-page) :global(.movie-work-detail-back-link):hover{color:#49359d}
 .aisaPromotionPage:global(.movie-work-detail-page) :global(.movie-work-detail-video-wrap){box-shadow:0 16px 42px #5e4bb52b}
