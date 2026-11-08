@@ -50,7 +50,7 @@ export const aisaWorks = [
   {
     slug: "survey-aggregation",
     category: "AI活用 / 業務改善（GAS）",
-    thumbnail: "/images/aisa/works/survey-aggregation.png",
+    thumbnail: "/images/aisa/works/survey-aggregation/survey-aggregation.png",
     title: "アンケート自動集計システム",
     description: "",
     detailUrl: "/aisa/works/survey-aggregation",
