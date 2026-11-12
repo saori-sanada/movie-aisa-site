@@ -11,7 +11,7 @@ export function AisaWorkDetailPage({ work }: { work: AisaWorkDetail }) {
     ? "movie-work-detail-video-wrap movie-work-detail-image-wrap movie-work-detail-media-16-9"
     : "movie-work-detail-video-wrap movie-work-detail-media-16-9";
 
-  const usesAisaLavenderTheme = work.slug === "ai-promotion-video" || work.slug === "supervision-mail" || work.slug === "video-auto-edit" || work.slug === "ai-site-production" || work.slug === "interview-booking" || work.slug === "survey-aggregation" || work.slug === "sns-cross-analysis";
+  const usesAisaLavenderTheme = work.slug === "ai-promotion-video" || work.slug === "supervision-mail" || work.slug === "video-auto-edit" || work.slug === "ai-site-production" || work.slug === "interview-booking" || work.slug === "survey-aggregation" || work.slug === "sns-cross-analysis" || work.slug === "ai-ad-video";
   const usesTopAlignedMedia = work.slug === "interview-booking" || work.slug === "survey-aggregation";
   const titleLines = work.titleLines ?? [work.title];
   const info = <aside className="movie-work-detail-info">
