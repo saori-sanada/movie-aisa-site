@@ -70,6 +70,17 @@ export const aisaWorks = [
     visualLabel: "INTERVIEW BOOKING",
   },
   {
+    slug: "sns-cross-analysis",
+    category: "AI活用 / Webアプリ・データ可視化",
+    thumbnail: "/images/aisa/works/sns-cross-analysis/sns-cross-analysis.png",
+    title: "SNS横断分析｜月次運用レポートシステム",
+    description: "3媒体のインサイトを月次で集計・可視化",
+    detailUrl: "/aisa/works/sns-cross-analysis",
+    detailEnabled: true,
+    alt: "SNS横断分析の完成サムネイル",
+    visualLabel: "SNS CROSS ANALYSIS",
+  },
+  {
     slug: "ai-ad-video-generation",
     category: "AI活用 / クリエイティブ",
     thumbnail: "/images/aisa/works/ai-ad-video-generation.png",

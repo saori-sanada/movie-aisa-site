@@ -2,6 +2,8 @@
 .desktopBreak{display:block}
 .aisaTitleLine{display:block;white-space:nowrap}
 .videoAutoEditMediaColumn{display:grid;gap:32px;min-width:0}
+.analyticsDetailGrid{grid-template-columns:minmax(0,1.62fr) minmax(320px,.9fr);grid-template-areas:"media info" "preview preview";align-items:start;gap:42px clamp(38px,5vw,72px)}
+.analyticsTopMedia{grid-area:media;min-width:0}.analyticsFullPreview{grid-area:preview;min-width:0;margin-top:4px}
 .videoAutoEditFullVideo{display:grid;gap:8px;margin:0}
 .videoAutoEditFullVideo h2{margin:0;color:#2c1d63;font-size:22px;font-weight:600;line-height:1.4;letter-spacing:.06em}
 .videoAutoEditFullVideo p{margin:0;color:#514774;font-size:13px;line-height:1.6;letter-spacing:.02em}
@@ -9,6 +11,7 @@
 .videoAutoEditFullVideo :global(.movie-work-detail-video-wrap) video{background:#fbfaff}
 .aiPromotionTitle{font-size:clamp(32px,3.5vw,50px)!important;line-height:1.1}
 .aiPromotionTitle span{display:block;white-space:nowrap}
+.analyticsTitle{font-size:clamp(30px,3.1vw,42px)!important;line-height:1.25!important;letter-spacing:.02em!important}.analyticsTitle .aisaTitleLine{white-space:nowrap}
 .videoPlaceholder{position:relative;display:grid;place-items:center;aspect-ratio:16 / 9;overflow:hidden;background:#17145b}
 .videoPlaceholderPoster{object-fit:cover;opacity:.42;filter:saturate(.8)}
 .videoPlaceholderOverlay{position:relative;z-index:1;display:grid;justify-items:center;gap:10px;padding:18px 22px;color:#fff;text-align:center;background:#17145bcc;box-shadow:0 12px 30px #17145b40}
@@ -20,6 +23,9 @@
 .featureList li::before{content:"—";margin-right:9px;color:#8061e9}
 @media(max-width:800px){.desktopBreak{display:none}}
 @media(max-width:800px){.aiPromotionTitle{font-size:clamp(30px,9vw,42px)!important}.aiPromotionAbout p{font-size:14px}}
+@media(max-width:900px){.analyticsDetailGrid{grid-template-columns:minmax(0,1fr);grid-template-areas:"info" "media" "preview";gap:28px}.analyticsFullPreview{margin-top:0}}
+@media(max-width:900px){.analyticsDetailGrid :global(.movie-work-detail-info){display:grid;gap:18px}}
+@media(max-width:800px){.analyticsTitle{font-size:clamp(30px,9vw,42px)!important;line-height:1.25!important}.analyticsTitle .aisaTitleLine{white-space:nowrap}}
 @media(max-width:900px){.videoAutoEditMediaColumn{gap:26px}}
 @media(max-width:900px){.videoAutoEditFullVideo :global(.movie-work-detail-video-wrap){width:100%}}
 @media(max-width:800px){.videoAutoEditMediaColumn> :global(.movie-work-detail-video-wrap){order:1}.videoAutoEditFullVideo{order:2}}
